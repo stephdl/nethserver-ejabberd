@@ -3,7 +3,7 @@
 % Host name:
 HERE
     $OUT .= '{hosts, ["';
-    $OUT .= ${ejabberd}{Domain};
+    $OUT .= ${DomainName};
     $OUT .= '"]}.';
     $OUT .= "\n\n";
 }
