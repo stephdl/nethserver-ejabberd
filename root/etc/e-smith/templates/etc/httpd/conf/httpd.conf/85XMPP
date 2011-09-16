@@ -1,2 +1,2 @@
-ProxyPass /http-bind http://127.0.0.1:5280/http-bind
-ProxyPassReverse /http-bind http://127.0.0.1:5280/http-bind
+ProxyPass /http-bind https://127.0.0.1:5280/http-bind
+ProxyPassReverse /http-bind https://127.0.0.1:5280/http-bind
