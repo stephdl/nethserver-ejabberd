@@ -17,6 +17,7 @@ templates2events("/etc/ejabberd/ejabberd.pem",  qw(
 # not really good setting of logrotate before starting ejabberd
 # but works for contrib or core integration
 templates2events("/etc/logrotate.d/ejabberd", "ejabberd-update");
+templates2events("/etc/httpd/conf/httpd.conf", "ejabberd-update");
 
 
 #--------------------------------------------------
@@ -48,5 +49,6 @@ service_link_enhanced("ejabberd", "K25", "0");
 
 templates2events("/etc/rc.d/init.d/masq", "ejabberd-update");
 safe_symlink("adjust", "root/etc/e-smith/events/ejabberd-update/services2adjust/masq");
+safe_symlink("restart", "root/etc/e-smith/events/ejabberd-update/services2adjust/httpd-e-smith");
 
 exit;
