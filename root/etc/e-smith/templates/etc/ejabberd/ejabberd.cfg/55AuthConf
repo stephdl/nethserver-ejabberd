@@ -3,15 +3,11 @@
  my $rootdn = "cn=root,$base";
  my $pwd = esmith::util::LdapPassword (); 
 
-    $OUT =<<'HERE';
-% Authentication method.  If you want to use internal user base, then use
-% this line:
-{auth_method, ldap}.
-{ldap_servers, ["localhost"]}.  
-{ldap_port, 389}.
-{ldap_rootdn, "$rootdn"}.
-{ldap_password, "$pwd"}.
-{ldap_base, "ou=Users,$base"}.
-{ldap_userdesc, "cn"}.
-HERE
+$OUT .= "{auth_method, ldap}.\n";
+$OUT .= "{ldap_servers, [\"localhost\"]}.\n";
+$OUT .= "{ldap_port, 389}.\n";
+$OUT .= "{ldap_rootdn, \"$rootdn\"}.\n";
+$OUT .= "{ldap_password, \"$pwd\"}.\n";
+$OUT .= "{ldap_base, \"ou=Users,$base\"}.\n";
+$OUT .= "{ldap_userdesc, \"cn\"}.\n";
 }

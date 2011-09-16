@@ -1,5 +1,4 @@
 {
- my $base = esmith::util::ldapBase ($DomainName);
 
     $OUT =<<'HERE';
 % Used modules:
@@ -7,18 +6,6 @@
  [
   {mod_roster,     []},
   {mod_shared_roster,[]},
-  {mod_shared_roster_ldap,[
-     {ldap_base, "$base"},
-     {ldap_rfilter, "(objectClass=posixAccount)"},
-     {ldap_ufilter,"(uid=%u)"},
-     {ldap_groupattr,"cn"},
-     {ldap_groupdesc,"o"},
-     {ldap_memberattr,"uid"},
-     {ldap_memberattr_format,"%u"},
-     {ldap_useruid, "uid"},
-     {ldap_userdesc,"cn"}
-  ]},
-
   {mod_http_bind,  []},
   {mod_privacy,    []},
   {mod_adhoc,      []},
@@ -57,4 +44,21 @@ HERE
     $OUT .= "\n";
     $OUT .= ' ]}.';
     $OUT .= "\n\n";
+ 
+my $base = esmith::util::ldapBase ($DomainName);
+
+$OUT.= "  {mod_shared_roster_ldap,[\n";
+$OUT.= '     {ldap_base, \"$base\"},\n';
+$OUT.= '     {ldap_rfilter, "(objectClass=posixAccount)"},\n';
+$OUT.= '     {ldap_ufilter,"(uid=%u)"},\n';
+$OUT.= '     {ldap_groupattr,"cn"},\n';
+
+my $group = $ejabberd{Group} || "o";
+$OUT.= "     {ldap_groupdesc,\"$group\"},\n";
+$OUT.= '     {ldap_memberattr,"uid"},\n';
+$OUT.= '     {ldap_memberattr_format,"%u"},\n';
+$OUT.= '     {ldap_useruid, "uid"},\n';
+$OUT.= '     {ldap_userdesc,"cn"}\n';
+$OUT.= '  ]},\n';
+
 }
