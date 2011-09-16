@@ -1,0 +1,14 @@
+{
+    $OUT =<<'HERE';
+% List of people who will get notifications about registered users
+%{registration_watchers, ["admin1@test.leclere.homeip.com",
+%                         "admin2@test.leclere.homeip.com"]}.
+HERE
+    if ( ${ejabberd}{Notify} eq 'enabled' ) {
+	$OUT .= '{registration_watchers, ["admin@';
+	$OUT .= ${DomainName};
+	$OUT .= ']}';
+	}
+    $OUT .= "\n";
+}
+

@@ -1,0 +1,19 @@
+{
+    $OUT =<<'HERE';
+% Blocked users:
+%{acl, blocked, {user, "test"}}.
+HERE
+    use esmith::AccountsDB;
+    my $adb = esmith::AccountsDB->open_ro();
+    my $users;
+    foreach $u ( grep { $_->prop("PasswordSet") ne 'yes' } $adb->users() ) {
+	$users .= ("^". $u->key() .'$|');
+	}
+    if ($users) {
+        chop $users;
+	$OUT .= ( '{acl, blocked, {user_regexp,"' . $users );
+        $OUT .= '"}}.';
+        $OUT .= "\n";
+	}
+    $OUT .= "\n";
+}

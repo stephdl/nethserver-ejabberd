@@ -1,0 +1,26 @@
+{
+    $OUT =<<'HERE';
+% After successful registration user will get message with following subject
+% and body:
+%{welcome_message,
+% {"Welcome!",
+%  "Welcome to Instant Messaging server localhost. "
+%  "For information about ejabberd visit http://www.process-one.net/"}}.
+% Replace them with 'none' if you don't want to send such message:
+HERE
+    $OUT .= '{welcome_message, ';
+    $OUT .= "\n";
+    if ( (defined ${ejabberd}{WelcomeSubject}) && ( ${ejabberd}{WelcomeSubject} ne '') ){
+	$OUT .= ('{"'.${ejabberd}{WelcomeSubject}.'",');
+	foreach $line ( split /\n/, ${ejabberd}{WelcomeText} ) {
+	    $OUT .= ('"'.$line.'"');
+	    $OUT .= "\n";
+	    }
+	$OUT .= '}';
+	}
+    else {
+	$OUT .= 'none';
+	}
+    $OUT .= '}.';
+    $OUT .= "\n";
+}

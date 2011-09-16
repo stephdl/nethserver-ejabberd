@@ -1,0 +1,45 @@
+{
+    $OUT =<<'HERE';
+% Used modules:
+{modules,
+ [
+  {mod_register,   [{access, register}]},
+  {mod_roster,     []},
+  {mod_privacy,    []},
+  {mod_adhoc,      []},
+  {mod_configure,  []}, % Depends on mod_adhoc
+  {mod_configure2, []},
+  {mod_disco,      []},
+  {mod_stats,      []},
+  {mod_vcard,      []},
+  {mod_caps,	   []},
+  {mod_offline,    []},
+  {mod_announce,   [{access, announce}]}, % Depends on mod_adhoc
+  {mod_private,    []},
+  {mod_irc,        []},
+% Default options for mod_muc:
+%   host: "conference." ++ ?MYNAME
+%   access: all
+%   access_create: all
+%   access_admin: none (only room creator has owner privileges)
+  {mod_muc,        [{access, muc}, {access_create, muc}, {access_admin, muc_admin}]},
+  {mod_muc_log,    []},
+  {mod_shared_roster, []},
+  {mod_pubsub,     [{access_createnode, pubsub_createnode}]},
+  {mod_time,       []},
+  {mod_last,       []},
+%  {mod_xmlrpc,[{port, 4560},{timeout, 5000}]},
+  {mod_version,    []},
+HERE
+    if (-e '/usr/lib/ejabberd/ebin/mod_admin_extra.beam' || -e '/usr/lib64/ejabberd/ebin/mod_admin_extra.beam')
+        { $OUT .= '  {mod_admin_extra,    []},'; }
+    else
+        { $OUT .= '  {mod_ctlextra,    []},'; }
+    $OUT .= "\n";
+    $OUT .= '  {mod_echo,       [{host, "echo.';
+    $OUT .= ${DomainName};
+    $OUT .= '"}]}';
+    $OUT .= "\n";
+    $OUT .= ' ]}.';
+    $OUT .= "\n\n";
+}

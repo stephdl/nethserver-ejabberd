@@ -1,0 +1,19 @@
+{
+    $OUT =<<'HERE';
+% SME server Local users:
+HERE
+    use esmith::AccountsDB;
+    my $adb = esmith::AccountsDB->open_ro();
+    my $users;
+    foreach $u ($adb->activeUsers()) {
+	$users .= ("\^" . $u->key() . '$|');
+	}
+    if (defined $users) {	
+	chop $users;
+	$OUT .= '{acl, smeusers, {user_regexp,"';
+	$OUT .= $users;
+	$OUT .= '"}}.';
+	$OUT .= "\n";
+	}
+    $OUT .= "\n";
+}

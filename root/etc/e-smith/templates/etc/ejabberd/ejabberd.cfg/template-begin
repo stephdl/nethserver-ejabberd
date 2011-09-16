@@ -1,0 +1,9 @@
+{
+    $OUT =<<'HERE';
+% $Id: smeserver-ejabberd-2.0.0-removeOpt.patch,v 1.2 2008/05/22 19:43:08 gnujpl Exp $
+
+override_acls.
+override_global.
+override_local.
+HERE
+}

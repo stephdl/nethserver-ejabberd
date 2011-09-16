@@ -1,0 +1,7 @@
+{
+    $OUT =<<'HERE';
+% Authentication method.  If you want to use internal user base, then use
+% this line:
+{auth_method, internal}.
+HERE
+}

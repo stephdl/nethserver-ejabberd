@@ -1,0 +1,14 @@
+{
+    $OUT =<<'HERE';
+% Every username can be registered via in-band registration:
+% You could replace {allow, all} with {deny, all} to prevent user from using
+% in-band registration
+HERE
+    $OUT .= '{access, register, [{';
+    my $perm = 'deny,all';
+    $perm = 'allow,all' if ( ${ejabberd}{Register} eq 'all' );
+    $perm = 'allow,smeusers' if ( ${ejabberd}{Register} eq 'smeusers' );
+    $OUT .= $perm;
+    $OUT .= '}]}.';
+    $OUT .= "\n\n";
+}

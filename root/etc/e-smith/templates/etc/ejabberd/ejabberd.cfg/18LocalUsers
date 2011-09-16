@@ -1,0 +1,7 @@
+{
+    $OUT =<<'HERE';
+% Local users:
+{acl, local, {user_regexp, ""}}.
+
+HERE
+}

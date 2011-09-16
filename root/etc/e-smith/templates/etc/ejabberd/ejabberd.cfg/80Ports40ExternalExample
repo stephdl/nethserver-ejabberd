@@ -1,0 +1,10 @@
+{
+    $OUT .= '	  %% This is an example on how to define an external service/transport:';
+    $OUT .= "\n";
+    $OUT .= '	  %%,{8888, ejabberd_service, [{access, all},';
+    $OUT .= "\n";
+    $OUT .= '	  %%        {hosts, ["icq.test.leclere.homeip.com", "sms.test.leclere.homeip.com"],';
+    $OUT .= "\n";
+    $OUT .= '	  %%        [{password, "secret"}]}]}';
+    $OUT .= "\n";
+}
