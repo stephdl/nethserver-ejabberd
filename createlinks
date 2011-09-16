@@ -5,19 +5,19 @@ use esmith::Build::CreateLinks  qw(:all);
 templates2events("/etc/ejabberd/ejabberd.cfg",  qw(
 	console-save
 	bootstrap-console-save
-	user-create
-	user-delete
-	user-lock
-	password-modify
 	ejabberd-update
 	));
+
+templates2events("/etc/ejabberd/ejabberd.pem",  qw(
+        console-save
+        bootstrap-console-save
+        ));
+
 
 # not really good setting of logrotate before starting ejabberd
 # but works for contrib or core integration
 templates2events("/etc/logrotate.d/ejabberd", "ejabberd-update");
 
-# add ejabberd code to rc.local
-templates2events("/etc/rc.d/rc.local", "bootstrap-console-save");
 
 #--------------------------------------------------
 # pre-backup actions
@@ -32,10 +32,6 @@ foreach $event (qw(
     network-delete
     console-save
     ejabberd-update
-    user-create
-    user-delete
-    user-lock
-    password-modify
 ))
 {
     safe_symlink("restart", "root/etc/e-smith/events/$event/services2adjust/ejabberd");
@@ -48,17 +44,9 @@ service_link_enhanced("ejabberd", "S90", "7");
 service_link_enhanced("ejabberd", "K25", "6");
 service_link_enhanced("ejabberd", "K25", "1");
 service_link_enhanced("ejabberd", "K25", "0");
-service_link_enhanced("ejabberd.init", "S99", "7");
 
 
 templates2events("/etc/rc.d/init.d/masq", "ejabberd-update");
 safe_symlink("adjust", "root/etc/e-smith/events/ejabberd-update/services2adjust/masq");
-
-# Daemontools links.
-safe_symlink("../daemontools", "root/etc/rc.d/init.d/supervise/ejabberd");
-safe_symlink("../var/service/ejabberd", "root/service/ejabberd");
-
-# Symlink for the cgi.
-panel_link("ejabberd", "manager");
 
 exit;
