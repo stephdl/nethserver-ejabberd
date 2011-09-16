@@ -1,5 +1,5 @@
 
-/var/log/ejabberd/ejabberd.log /var/log/ejabberd/sasl.log \{
+/var/log/ejabberd/ejabberd.log \{
     missingok
     compress
     notifempty
@@ -8,6 +8,6 @@
     create 0644 ejabberd ejabberd
     sharedscripts
     postrotate
-        sudo -u ejabberd -H /sbin/e-smith/ejabberdctl  reopen-log >/dev/null 2>/dev/null || true
+        /sbin/e-smith/service ejabberd restart >/dev/null 2>/dev/null || true
     endscript
 \}
