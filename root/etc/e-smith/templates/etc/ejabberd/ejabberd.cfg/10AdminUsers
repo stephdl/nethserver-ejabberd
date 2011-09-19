@@ -1,8 +1,12 @@
 {
-    $OUT =<<'HERE';
-% Users that have admin access.  Add line like one of the following after you
-% will be successfully registered on server to get admin access:
-{acl, admin, {user, "admin"}}.
-HERE
+    my $admins = $ejabberd{'Admins'} || '^admin$';
+    if ($admins ne "admin")
+    {
+	my @tmp = split(/,/,$admins);
+	$admins = join('$|^',@tmp);
+        $admins = "^$admins\$";
+    } 
+    $OUT .= "%Admin users\n";
+    $OUT .= "{acl, admin, {user_regexp, \"$admins\"}}.";
 }
 
