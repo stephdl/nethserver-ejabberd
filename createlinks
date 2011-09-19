@@ -11,6 +11,7 @@ templates2events("/etc/ejabberd/ejabberd.cfg",  qw(
 templates2events("/etc/ejabberd/ejabberd.pem",  qw(
         console-save
         bootstrap-console-save
+	ejabberd-update
         ));
 
 
