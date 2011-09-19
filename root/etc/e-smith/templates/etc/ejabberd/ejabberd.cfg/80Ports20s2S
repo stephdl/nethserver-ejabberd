@@ -1,6 +1,6 @@
 {
     $OUT .='	  %% Remove this line if you want to prevent s2s connections:';
     $OUT .= "\n";
-    $OUT .= '      ,{5269, ejabberd_s2s_in,  [{shaper, s2s_shaper}, {max_stanza_size, 131072}]}';
+    $OUT .= '     %% ,{5269, ejabberd_s2s_in,  [{shaper, s2s_shaper}, {max_stanza_size, 131072}]}';
     $OUT .= "\n";
 }
