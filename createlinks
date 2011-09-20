@@ -21,14 +21,6 @@ templates2events("/etc/logrotate.d/ejabberd", "ejabberd-update");
 templates2events("/etc/httpd/conf/httpd.conf", "ejabberd-update");
 
 
-#--------------------------------------------------
-# pre-backup actions
-#--------------------------------------------------
-my $event = "pre-backup";
-
-event_link("ejabberd-delete-dumped-tables", $event, "11");
-event_link("ejabberd-dump-tables", $event, "21");
-
 foreach $event (qw(
     network-create
     network-delete
