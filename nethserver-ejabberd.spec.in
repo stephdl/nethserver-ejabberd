@@ -1,7 +1,6 @@
 # Original work of Jean-Paul Leclère
 Summary: NethServer ejabberd Jabber service
-%define name smeserver-ejabberd
-Name: %{name}
+Name: nethserver-ejabberd
 Version: @@VERSION@@
 Release: @@RELEASE@@%{?dist}
 License: GPL
