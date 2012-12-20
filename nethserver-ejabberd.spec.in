@@ -1,0 +1,55 @@
+# Original work of Jean-Paul Leclère
+Summary: NethServer ejabberd Jabber service
+%define name smeserver-ejabberd
+Name: %{name}
+Version: @@VERSION@@
+Release: @@RELEASE@@%{?dist}
+License: GPL
+Group: Networking/Daemons
+Source: %{name}-%{version}.tar.gz
+BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
+BuildArch: noarch
+BuildRequires: nethserver-devtools
+Requires: ejabberd >= 2.0.1
+AutoReq: no
+
+
+%description
+NethServer implementation of ejabberd XMPP server
+
+
+%preun
+source /etc/nethserver/rpm_hook_functions
+signal_event  %{name}-uninstall $1
+
+%post
+source /etc/nethserver/rpm_hook_functions
+event_queue add %{name}-update
+
+%prep
+%setup
+
+%build
+perl createlinks
+mkdir -p root/var/log/ejabberd.run
+mkdir -p root/var/log/ejabberd
+
+
+%install
+rm -rf $RPM_BUILD_ROOT
+(cd root ; find . -depth -print | cpio -dump $RPM_BUILD_ROOT)
+rm -f %{name}-%{version}-%{release}-filelist
+/sbin/e-smith/genfilelist $RPM_BUILD_ROOT \
+    --dir '/var/log/ejabberd' 'attr(0750,ejabberd,ejabberd)' \
+     > %{name}-%{version}-%{release}-filelist
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+
+%files -f %{name}-%{version}-%{release}-filelist 
+%defattr(-,root,root)
+
+%changelog
+* Thu Dec 20 2012 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> 1.0.0-1
+- First NethServer release

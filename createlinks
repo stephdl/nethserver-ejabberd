@@ -1,47 +1,75 @@
 #!/usr/bin/perl -w
+#
+# Copyright (C) 2012 Nethesis S.r.l.
+# http://www.nethesis.it - support@nethesis.it
+# 
+# This script is part of NethServer.
+# 
+# NethServer is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License,
+# or any later version.
+# 
+# NethServer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with NethServer.  If not, see <http://www.gnu.org/licenses/>.
+#
 
 use esmith::Build::CreateLinks  qw(:all);
 
-templates2events("/etc/ejabberd/ejabberd.cfg",  qw(
-	console-save
-	bootstrap-console-save
-	ejabberd-update
-	));
-
-templates2events("/etc/ejabberd/ejabberd.pem",  qw(
-        console-save
-        bootstrap-console-save
-	ejabberd-update
-        ));
-
-
-# not really good setting of logrotate before starting ejabberd
-# but works for contrib or core integration
-templates2events("/etc/logrotate.d/ejabberd", "ejabberd-update");
-templates2events("/etc/httpd/conf/httpd.conf", "ejabberd-update");
-
-
-foreach $event (qw(
-    network-create
-    network-delete
-    console-save
-    ejabberd-update
-))
-{
-    safe_symlink("restart", "root/etc/e-smith/events/$event/services2adjust/ejabberd");
-}
 
 #--------------------------------------------------
-# startup and stop symlink
+# actions for nethserver-ejabberd-update event
 #--------------------------------------------------
-service_link_enhanced("ejabberd", "S90", "7");
-service_link_enhanced("ejabberd", "K25", "6");
-service_link_enhanced("ejabberd", "K25", "1");
-service_link_enhanced("ejabberd", "K25", "0");
+
+my $event = "nethserver-ejabberd-update";
+
+event_actions($event,
+              'initialize-default-databases' => '00',
+              'nethserver-ejabberd-conf' => '02',
+              'firewall-adjust' => '30',
+              'runlevel-adjust' => '40');
+templates2events("/etc/ejabberd/ejabberd.cfg",  $event);
+templates2events("/etc/ejabberd/ejabberd.pem",  $event);
+event_services($event, 'httpd' => 'reload');
+event_services($event, 'ejabberd' => 'restart');
 
 
-templates2events("/etc/rc.d/init.d/masq", "ejabberd-update");
-safe_symlink("adjust", "root/etc/e-smith/events/ejabberd-update/services2adjust/masq");
+#--------------------------------------------------
+# actions for nethserver-ejabberd-save event
+#--------------------------------------------------
+
+$event = "nethserver-ejabberd-save";
+
+event_services($event, 'ejabberd' => 'restart');
+event_services($event, 'httpd' => 'reload');
+templates2events("/etc/ejabberd/ejabberd.cfg",  $event);
+templates2events("/etc/ejabberd/ejabberd.pem",  $event);
+
+
+#--------------------------------------------------
+# actions for nethserver-ejabberd-uninstall event
+#--------------------------------------------------
+
+$event = "nethserver-ejabberd-uninstall";
+
+event_actions($event,
+              'nethserver-ejabberd-uninstall' => '02',
+              'firewall-adjust' => '40',
+              'runlevel-adjust' => '50');
+
+templates2events("/etc/ejabberd/ejabberd.cfg",  $event);
+templates2events("/etc/ejabberd/ejabberd.pem",  $event);
+event_services($event, 'httpd' => 'reload');
+
+
+
+
+
 safe_symlink("restart", "root/etc/e-smith/events/ejabberd-update/services2adjust/httpd-e-smith");
 
 exit;
