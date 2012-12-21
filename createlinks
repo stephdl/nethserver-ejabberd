@@ -65,6 +65,6 @@ event_services($event, 'httpd' => 'reload');
 
 
 # Use slapd.pem for ejabberd cert file (temporary hack)
-safe_symlink("/etc/pki/tls/certs/slapd.pem","/etc/ejabberd/ejabberd.pem");
+safe_symlink("/etc/pki/tls/certs/slapd.pem","root/etc/ejabberd/ejabberd.pem");
 
 exit;
