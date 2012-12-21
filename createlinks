@@ -34,6 +34,8 @@ event_actions($event,
               'firewall-adjust' => '30',
               'runlevel-adjust' => '40');
 templates2events("/etc/ejabberd/ejabberd.cfg",  $event);
+# Use slapd.pem for ejabberd cert file (temporary hack)
+templates2events("/etc/ejabberd/ejabberd.pem",  $event);
 event_services($event, 'httpd' => 'reload');
 event_services($event, 'ejabberd' => 'restart');
 
@@ -62,9 +64,5 @@ event_actions($event,
 
 templates2events("/etc/ejabberd/ejabberd.cfg",  $event);
 event_services($event, 'httpd' => 'reload');
-
-
-# Use slapd.pem for ejabberd cert file (temporary hack)
-safe_symlink("/etc/pki/tls/certs/slapd.pem","root/etc/ejabberd/ejabberd.pem");
 
 exit;
