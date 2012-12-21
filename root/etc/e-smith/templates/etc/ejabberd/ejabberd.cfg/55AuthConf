@@ -1,13 +1,15 @@
 {
- my $base = esmith::util::ldapBase ($DomainName);
- my $rootdn = "cn=root,$base";
- my $pwd = esmith::util::LdapPassword (); 
+  use NethServer::Directory;
 
-$OUT .= "{auth_method, ldap}.\n";
-$OUT .= "{ldap_servers, [\"localhost\"]}.\n";
-$OUT .= "{ldap_port, 389}.\n";
-$OUT .= "{ldap_rootdn, \"$rootdn\"}.\n";
-$OUT .= "{ldap_password, \"$pwd\"}.\n";
-$OUT .= "{ldap_base, \"ou=Users,$base\"}.\n";
-$OUT .= "{ldap_userdesc, \"cn\"}.\n";
+  my $internalSuffix = NethServer::Directory::getInternalSuffix();
+  my $pwd = NethServer::Directory::getUserPassword('ejabberd', 0);
+  my $rootdn = "cn=ejabberd,$internalSuffix";
+
+  $OUT .= "{auth_method, ldap}.\n";
+  $OUT .= "{ldap_servers, [\"localhost\"]}.\n";
+  $OUT .= "{ldap_port, 389}.\n";
+  $OUT .= "{ldap_rootdn, \"$rootdn\"}.\n";
+  $OUT .= "{ldap_password, \"$pwd\"}.\n";
+  $OUT .= "{ldap_base, \"ou=People,$internalSuffix\"}.\n";
+  $OUT .= "{ldap_userdesc, \"cn\"}.\n";
 }

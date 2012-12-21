@@ -21,4 +21,53 @@
 
 use strict;
 use NethServer::Service;
+use NethServer::Directory;
+
+my $ldap = NethServer::Directory::connect();
+my $internalSuffix = NethServer::Directory::getInternalSuffix();
+my $exitCode = 0;
+
+
+#
+# Adjust LDAP ACLs to allow dovecot read on any field through ldapi:// socket.
+#
+my $ldapAccessDirective = 'by dn.exact="cn=ejabberd,'.$internalSuffix.'" read';
+
+NethServer::Directory::addAccessDirective($ldapAccessDirective, '*');
+
+
+# Create ejabberd ldap user
+
+{ # BEGIN LDAP
+
+    my $password = NethServer::Directory::getUserPassword('ejabberd', 0);
+
+    my @entries = (
+        [ 'cn=ejabberd,' . $internalSuffix,
+          attrs => [
+              objectClass => ['device', 'simpleSecurityObject'],
+              cn => 'ejabberd',
+              userPassword => NethServer::Directory::getUserPassword('ejabberd', 1),
+              description => 'Ejabberd management account'
+          ] 
+        ]
+        );
+
+    foreach(@entries) {
+        my $message = $ldap->merge(@{$_});
+        if($message->is_error()) {
+            warn 'error merging ' . $_[0];
+            $exitCode ++;
+        }
+    }
+
+} # END LDAP
+
+
+
+# Add ejabberd service 
+
 NethServer::Service::manage_add('nethserver-ejabberd', 'ejabberd');
+
+exit($exitCode);
+
