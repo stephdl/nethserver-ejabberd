@@ -34,7 +34,6 @@ event_actions($event,
               'firewall-adjust' => '30',
               'runlevel-adjust' => '40');
 templates2events("/etc/ejabberd/ejabberd.cfg",  $event);
-templates2events("/etc/ejabberd/ejabberd.pem",  $event);
 event_services($event, 'httpd' => 'reload');
 event_services($event, 'ejabberd' => 'restart');
 
@@ -48,7 +47,6 @@ $event = "nethserver-ejabberd-save";
 event_services($event, 'ejabberd' => 'restart');
 event_services($event, 'httpd' => 'reload');
 templates2events("/etc/ejabberd/ejabberd.cfg",  $event);
-templates2events("/etc/ejabberd/ejabberd.pem",  $event);
 
 
 #--------------------------------------------------
@@ -63,13 +61,10 @@ event_actions($event,
               'runlevel-adjust' => '50');
 
 templates2events("/etc/ejabberd/ejabberd.cfg",  $event);
-templates2events("/etc/ejabberd/ejabberd.pem",  $event);
 event_services($event, 'httpd' => 'reload');
 
 
-
-
-
-safe_symlink("restart", "root/etc/e-smith/events/ejabberd-update/services2adjust/httpd-e-smith");
+# Use slapd.pem for ejabberd cert file (temporary hack)
+safe_symlink("/etc/pki/tls/certs/slapd.pem","/etc/ejabberd/ejabberd.pem");
 
 exit;
