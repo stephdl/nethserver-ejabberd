@@ -7,6 +7,6 @@
         $admins = "^$admins\$";
     } 
     $OUT .= "%Admin users\n";
-    $OUT .= "{acl, admin, {user_regexp, \"$admins\"}}.";
+    $OUT .= "{acl, admin, {user_regexp, \"".getUsersList('jabberadmins')."\"}}.";
 }
 
