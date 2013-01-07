@@ -10,7 +10,7 @@ BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
 BuildRequires: nethserver-devtools
 Requires: ejabberd >= 2.0.1
-Requires: nethserver-directory
+Requires: nethserver-directory, nethserver-httpd
 AutoReq: no
 
 
