@@ -43,7 +43,7 @@ HERE
     $OUT .= '"}]},';
     $OUT .= "\n";
  
-my $base = esmith::util::ldapBase ($DomainName);
+my $base = NethServer::Directory::getDomainSuffix();
 
 $OUT.= "  {mod_shared_roster_ldap,[\n";
 $OUT.= "     {ldap_base, \"$base\"},\n";
