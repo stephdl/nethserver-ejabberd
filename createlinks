@@ -71,7 +71,8 @@ event_services($event, 'httpd' => 'reload');
 # Restart ejabberd on jabberadmins group update
 #--------------------------------------------------
 
-$event = "group-modify"
+$event = "group-modify";
+
 event_actions($event, 'nethserver-ejabberd-update-group' => '90');
 
 
