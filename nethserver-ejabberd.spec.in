@@ -2,7 +2,7 @@
 Summary: NethServer ejabberd Jabber service
 Name: nethserver-ejabberd
 Version: @@VERSION@@
-Release: @@RELEASE@@%{?dist}
+Release: @@RELEASE@@
 License: GPL
 Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
@@ -51,5 +51,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 %changelog
-* Thu Dec 20 2012 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> 1.0.0-1
-- First NethServer release
+* Thu Jan 17 2013 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> 1.0.0-1
+- First release
