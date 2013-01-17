@@ -23,6 +23,7 @@ use strict;
 use NethServer::Service;
 use NethServer::Directory;
 use esmith::AccountsDB;
+use esmith::event;
 use User::pwent;
 
 
@@ -79,7 +80,7 @@ my $group = 'jabberadmins';
 
 my $grent = getgrnam($group);
 if( ! $grent) {
-    $exitCode += esmith::event::event_signal('group-create', $group);
+    $exitCode += event_signal('group-create', $group);
 }
 
 exit($exitCode);
