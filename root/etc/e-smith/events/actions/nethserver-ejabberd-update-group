@@ -36,7 +36,7 @@ my @groups = @ARGV;
 
 foreach my $groupName (@groups)
 {
-    if ( $groupName eq 'jabberdadmins' ) {
+    if ( $groupName eq 'jabberadmins' ) {
         processTemplate({ TEMPLATE_PATH => '/etc/ejabberd/ejabberd.cfg' });
         if (NethServer::Service::is_enabled('ejabberd')) {
             esmith::util::serviceControl
