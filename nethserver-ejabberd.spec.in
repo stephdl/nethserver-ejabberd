@@ -4,13 +4,13 @@ Name: nethserver-ejabberd
 Version: @@VERSION@@
 Release: @@RELEASE@@
 License: GPL
-Group: Networking/Daemons
 Source: %{name}-%{version}.tar.gz
-BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
+
 BuildArch: noarch
-BuildRequires: nethserver-devtools
+BuildRequires: nethserver-devtools >= 1.0.0
 Requires: ejabberd >= 2.0.1
-Requires: nethserver-directory, nethserver-httpd
+Requires: nethserver-directory >= 1.1.1-5
+Requires: nethserver-httpd >= 1.0.1-2
 AutoReq: no
 
 
