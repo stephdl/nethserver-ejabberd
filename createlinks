@@ -75,5 +75,11 @@ $event = "group-modify";
 
 event_actions($event, 'nethserver-ejabberd-update-group' => '90');
 
+#--------------------------------------------------
+# actions for migration-import event
+#--------------------------------------------------
+
+$event = "migration-import";
+event_actions($event, 'nethserver-ejabberd-migrate' => 50);
 
 exit;
