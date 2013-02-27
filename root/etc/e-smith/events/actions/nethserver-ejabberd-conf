@@ -27,60 +27,20 @@ use esmith::event;
 use User::pwent;
 
 
-my $ldap = NethServer::Directory::connect();
-my $internalSuffix = NethServer::Directory::getInternalSuffix();
+my $ldap = NethServer::Directory->new();
 my $exitCode = 0;
 
-
-#
-# Adjust LDAP ACLs to allow dovecot read on any field through ldapi:// socket.
-#
-my $ldapAccessDirective = 'by dn.exact="cn=ejabberd,'.$internalSuffix.'" read';
-
-NethServer::Directory::addAccessDirective($ldapAccessDirective, '*');
-
-
-# Create ejabberd ldap user
-
-{ # BEGIN LDAP
-
-    my $password = NethServer::Directory::getUserPassword('ejabberd', 0);
-
-    my @entries = (
-        [ 'cn=ejabberd,' . $internalSuffix,
-          attrs => [
-              objectClass => ['device', 'simpleSecurityObject'],
-              cn => 'ejabberd',
-              userPassword => NethServer::Directory::getUserPassword('ejabberd', 1),
-              description => 'Ejabberd management account'
-          ] 
-        ]
-        );
-
-    foreach(@entries) {
-        my $message = $ldap->merge(@{$_});
-        if($message->is_error()) {
-            warn 'error merging ' . $_[0];
-            $exitCode ++;
-        }
-    }
-
-} # END LDAP
-
-
+# Register ejabberd service account in LDAP:
+$ldap->configServiceAccount('ejabberd', NethServer::Directory::FIELDS_READ) || $exitCode++;
 
 # Add ejabberd service 
-
 NethServer::Service::manage_add('nethserver-ejabberd', 'ejabberd');
 
 
 # Add ejabber admin group: jabberadmins
-
 my $group = 'jabberadmins';
-
-my $grent = getgrnam($group);
-if( ! $grent) {
-    $exitCode += event_signal('group-create', $group);
+if( ! getgrnam($group)) {
+    event_signal('group-create', $group) || $exitCode++;
 }
 
 exit($exitCode);
