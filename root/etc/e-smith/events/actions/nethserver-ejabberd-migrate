@@ -39,6 +39,11 @@ my $dstConfigDb = esmith::DB::db->open('configuration') || die("Could not open d
 
 my $service = 'ejabberd';
 my $old = $srcConfigDb->get($service);
+if( ! $old) {
+    warn "[INFO] $service key not found in source ConfigDB. Nothing to do.\n";
+    exit(0);
+}
+
 my $new = $dstConfigDb->get($service) || $dstConfigDb->new_record($service);
 $new->merge_props($old->props);
 
