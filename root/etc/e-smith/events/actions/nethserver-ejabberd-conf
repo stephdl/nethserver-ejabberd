@@ -33,11 +33,5 @@ my $exitCode = 0;
 # Register ejabberd service account in LDAP:
 $ldap->configServiceAccount('ejabberd', NethServer::Directory::FIELDS_READ) || $exitCode++;
 
-# Add ejabber admin group: jabberadmins
-my $group = 'jabberadmins';
-if( ! getgrnam($group)) {
-    event_signal('group-create', $group) || $exitCode++;
-}
-
 exit($exitCode);
 
