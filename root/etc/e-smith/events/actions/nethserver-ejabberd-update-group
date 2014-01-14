@@ -22,32 +22,18 @@
 package esmith;
 
 use strict;
-use Errno;
-use esmith::templates;
-use esmith::util;
-use NethServer::Service;
-
+use esmith::event;
 
 my $event = shift || die "Event name arg missing\n";
+my $groupName = shift;
+my $errors = 0;
 
-# multiple group name arguments are allowed for
-# backward-compatibility, but produce a warning.
-my @groups = @ARGV;
-
-foreach my $groupName (@groups)
-{
-    if ( $groupName eq 'jabberadmins' ) {
-        processTemplate({ TEMPLATE_PATH => '/etc/ejabberd/ejabberd.cfg' });
-        if (NethServer::Service::is_enabled('ejabberd')) {
-            esmith::util::serviceControl
-            (
-                NAME   => 'ejabberd',
-                ACTION => 'restart',
-                BACKGROUND => 'false',
-            )
-       }
-
-    }
-
+if ($groupName ne 'jabberadmins' ) {
+    exit(0);
 }
 
+if( ! esmith::event::event_signal('nethserver-ejabberd-save')) {
+    $errors++;
+}
+
+exit($errors == 0 ? 0 : 1);

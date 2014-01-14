@@ -1,12 +1,5 @@
-{
-    my $admins = $ejabberd{'Admins'} || '^admin$';
-    if ($admins ne "admin")
-    {
-	my @tmp = split(/,/,$admins);
-	$admins = join('$|^',@tmp);
-        $admins = "^$admins\$";
-    } 
-    $OUT .= "%Admin users\n";
-    $OUT .= "{acl, admin, {user_regexp, \"".getUsersList('jabberadmins')."\"}}.";
-}
+%
+% 10AdminUsers
+%
+\{acl, admin, \{user_regexp, "{ sprintf('^(%s)$', join('|', @jabberadmins)) }"\}\}.
 

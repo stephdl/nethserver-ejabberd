@@ -1,0 +1,9 @@
+{
+    #
+    # 00template_vars
+    #
+    use esmith::AccountsDB;
+    my %accounts = esmith::AccountsDB->as_hash();
+    @jabberadmins = split(',', $accounts{'jabberadmins'}{'Members'} || '');
+    '';
+}
