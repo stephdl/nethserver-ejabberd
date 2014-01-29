@@ -26,6 +26,7 @@ NethServer implementation of ejabberd XMPP server
 %setup
 
 %build
+%{makedocs}
 perl createlinks
 mkdir -p root/var/log/ejabberd.run
 mkdir -p root/var/log/ejabberd
