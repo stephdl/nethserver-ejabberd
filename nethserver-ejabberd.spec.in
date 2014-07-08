@@ -48,6 +48,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 
 %changelog
+* Tue Jul 08 2014 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.4-1.ns6
+- DNS SRV record for XMPP protocol - Enhancement #2715
+- Fix missing Italian translation - Bug #2706
+
 * Wed Feb 05 2014 Davide Principi <davide.principi@nethesis.it> - 1.0.3-1.ns6
 - Move admin user in LDAP DB - Feature #2492 [NethServer]
 - Lib: synchronize service status prop and chkconfig - Feature #2067 [NethServer]
