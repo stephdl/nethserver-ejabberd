@@ -1,8 +1,8 @@
 # Original work of Jean-Paul Leclère
 Summary: NethServer ejabberd Jabber service
 Name: nethserver-ejabberd
-Version: @@VERSION@@
-Release: @@RELEASE@@
+Version: 1.0.4
+Release: 1
 License: GPL
 Source: %{name}-%{version}.tar.gz
 
