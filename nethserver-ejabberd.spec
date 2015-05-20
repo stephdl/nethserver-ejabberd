@@ -2,7 +2,7 @@
 Summary: NethServer ejabberd Jabber service
 Name: nethserver-ejabberd
 Version: 1.0.4
-Release: 1
+Release: 1%{?dist}
 License: GPL
 Source: %{name}-%{version}.tar.gz
 
