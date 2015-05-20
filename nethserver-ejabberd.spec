@@ -7,20 +7,13 @@ License: GPL
 Source: %{name}-%{version}.tar.gz
 
 BuildArch: noarch
-BuildRequires: nethserver-devtools >= 1.0.0
-Requires: ejabberd >= 2.0.1
-Requires: nethserver-directory >= 1.1.1-5
-Requires: nethserver-httpd >= 1.0.1-2
-AutoReq: no
-
+BuildRequires: nethserver-devtools
+Requires: ejabberd
+Requires: nethserver-directory
+Requires: nethserver-httpd
 
 %description
 NethServer implementation of ejabberd XMPP server
-
-
-%preun
-
-%post
 
 %prep
 %setup
@@ -31,21 +24,19 @@ perl createlinks
 mkdir -p root/var/log/ejabberd.run
 mkdir -p root/var/log/ejabberd
 
-
 %install
-rm -rf $RPM_BUILD_ROOT
-(cd root ; find . -depth -print | cpio -dump $RPM_BUILD_ROOT)
-rm -f %{name}-%{version}-%{release}-filelist
-/sbin/e-smith/genfilelist $RPM_BUILD_ROOT \
+rm -rf %{buildroot}
+(cd root ; find . -depth -print | cpio -dump %{buildroot})
+%{genfilelist} %{buildroot} \
     --dir '/var/log/ejabberd' 'attr(0750,ejabberd,ejabberd)' \
      > %{name}-%{version}-%{release}-filelist
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 
 %files -f %{name}-%{version}-%{release}-filelist 
 %defattr(-,root,root)
+%doc COPYING
+%dir %{_nseventsdir}/%{name}-update
+
 
 %changelog
 * Tue Jul 08 2014 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.4-1.ns6
