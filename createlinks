@@ -44,7 +44,7 @@ event_templates('nethserver-ejabberd-update', qw(
 event_services('nethserver-ejabberd-update', qw(
                httpd reload
                ejabberd restart
-               dnsmasq reload
+               dnsmasq restart
 ));
 
 
