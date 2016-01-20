@@ -11,5 +11,4 @@
   $OUT .= "{ldap_rootdn, \"$rootdn\"}.\n";
   $OUT .= "{ldap_password, \"$pwd\"}.\n";
   $OUT .= "{ldap_base, \"ou=People,$internalSuffix\"}.\n";
-  $OUT .= "{ldap_userdesc, \"cn\"}.\n";
 }
