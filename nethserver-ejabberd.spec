@@ -21,22 +21,18 @@ NethServer implementation of ejabberd XMPP server
 %build
 %{makedocs}
 perl createlinks
-mkdir -p root/var/log/ejabberd.run
-mkdir -p root/var/log/ejabberd
 
 %install
 rm -rf %{buildroot}
 (cd root ; find . -depth -print | cpio -dump %{buildroot})
-%{genfilelist} %{buildroot} \
-    --dir '/var/log/ejabberd' 'attr(0750,ejabberd,ejabberd)' \
-     > %{name}-%{version}-%{release}-filelist
-
+%{genfilelist} %{buildroot} > %{name}-%{version}-%{release}-filelist
+mkdir -p %{buildroot}/%{_localstatedir}/log/ejabberd
 
 %files -f %{name}-%{version}-%{release}-filelist 
 %defattr(-,root,root)
 %doc COPYING
 %dir %{_nseventsdir}/%{name}-update
-
+attr(0750,ejabberd,ejabberd) %dir %{_localstatedir}/log/ejabberd
 
 %changelog
 * Tue Jul 08 2014 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.4-1.ns6
