@@ -1,5 +1,4 @@
-# Original work of Jean-Paul Leclère
-Summary: NethServer ejabberd Jabber service
+Summary: NethServer ejabberd XMPP server
 Name: nethserver-ejabberd
 Version: 1.0.4
 Release: 1%{?dist}
@@ -8,12 +7,17 @@ Source: %{name}-%{version}.tar.gz
 
 BuildArch: noarch
 BuildRequires: nethserver-devtools
+BuildRequires: systemd
+Requires(post): systemd
+Requires(preun): systemd
+Requires(postun): systemd
+
 Requires: ejabberd
 Requires: nethserver-directory
 Requires: nethserver-httpd
 
 %description
-NethServer implementation of ejabberd XMPP server
+NethServer configuration of ejabberd XMPP server
 
 %prep
 %setup
@@ -27,12 +31,27 @@ rm -rf %{buildroot}
 (cd root ; find . -depth -print | cpio -dump %{buildroot})
 %{genfilelist} %{buildroot} > %{name}-%{version}-%{release}-filelist
 mkdir -p %{buildroot}/%{_localstatedir}/log/ejabberd
+mkdir -p %{buildroot}/%{_sysconfdir}/ejabberd
+mkdir -p %{buildroot}/%{_localstatedir}/lib/ejabberd
 
 %files -f %{name}-%{version}-%{release}-filelist 
 %defattr(-,root,root)
 %doc COPYING
 %dir %{_nseventsdir}/%{name}-update
-attr(0750,ejabberd,ejabberd) %dir %{_localstatedir}/log/ejabberd
+%attr(0750,ejabberd,ejabberd) %dir %{_localstatedir}/log/ejabberd
+%attr(0750,ejabberd,ejabberd) %dir %{_localstatedir}/lib/ejabberd
+%attr(0750,ejabberd,ejabberd) %dir %{_sysconfdir}/ejabberd
+%attr(0640,ejabberd,ejabberd) %ghost %{_sysconfdir}/ejabberd/ejabberd.cfg
+
+%post
+%systemd_post ejabberd.service
+
+%preun
+%systemd_preun ejabberd.service
+
+%postun
+%systemd_postun
+
 
 %changelog
 * Tue Jul 08 2014 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.0.4-1.ns6
