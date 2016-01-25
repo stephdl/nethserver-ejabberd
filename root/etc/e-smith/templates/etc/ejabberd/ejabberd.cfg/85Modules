@@ -33,10 +33,7 @@
 %  {mod_xmlrpc,[{port, 4560},{timeout, 5000}]},
   {mod_version,    []},
 HERE
-    if (-e '/usr/lib/ejabberd/ebin/mod_admin_extra.beam' || -e '/usr/lib64/ejabberd/ebin/mod_admin_extra.beam')
-        { $OUT .= '  {mod_admin_extra,    []},'; }
-    else
-        { $OUT .= '  {mod_ctlextra,    []},'; }
+    $OUT .= '  {mod_admin_extra,    []},';
     $OUT .= "\n";
     $OUT .= '  {mod_echo,       [{host, "echo.';
     $OUT .= ${DomainName};
@@ -55,8 +52,7 @@ my $group = $ejabberd{Group} || "o";
 $OUT.= "     {ldap_groupdesc,\"$group\"},\n";
 $OUT.= "     {ldap_memberattr,\"uid\"},\n";
 $OUT.= "     {ldap_memberattr_format,\"%u\"},\n";
-$OUT.= "     {ldap_useruid, \"uid\"},\n";
-$OUT.= "     {ldap_userdesc,\"cn\"}\n";
+$OUT.= "     {ldap_useruid, \"uid\"}\n";
 $OUT.= "  ]}\n";
 $OUT .= ' ]}.';
 
