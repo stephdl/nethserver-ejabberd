@@ -13,7 +13,6 @@ Requires(preun): systemd
 Requires(postun): systemd
 
 Requires: ejabberd
-Requires: nethserver-directory
 Requires: nethserver-httpd
 
 %description

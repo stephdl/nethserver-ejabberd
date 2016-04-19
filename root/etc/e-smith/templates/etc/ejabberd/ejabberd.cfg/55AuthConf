@@ -1,14 +1,17 @@
 {
-  use NethServer::Directory;
+  use NethServer::SSSD;
 
-  my $internalSuffix = NethServer::Directory::getInternalSuffix();
-  my $pwd = NethServer::Directory::getUserPassword('ejabberd', 0);
-  my $rootdn = "cn=ejabberd,$internalSuffix";
+  my $sssd = new NethServer::SSSD();
 
-  $OUT .= "{auth_method, ldap}.\n";
-  $OUT .= "{ldap_servers, [\"localhost\"]}.\n";
-  $OUT .= "{ldap_port, 389}.\n";
-  $OUT .= "{ldap_rootdn, \"$rootdn\"}.\n";
-  $OUT .= "{ldap_password, \"$pwd\"}.\n";
-  $OUT .= "{ldap_base, \"ou=People,$internalSuffix\"}.\n";
+  $OUT .= "{auth_method, [ldap]}.\n";
+  $OUT .= "{ldap_servers, [\"".$sssd->host()."\"]}.\n";
+  $OUT .= "{ldap_port, ".$sssd->port()."}.\n";
+  $OUT .= "{ldap_base, \"".$sssd->baseDN()."\"}.\n";
+  $OUT .= "{ldap_rootdn, \"".$sssd->bindDN()."\"}.\n";
+  $OUT .= "{ldap_password, \"".$sssd->bindPassword()."\"}.\n";
+
+  if ($sssd->isAD()) {
+      $OUT .= "{ldap_uids, [\"sAMAccountName\"]}.\n";
+  }
+
 }

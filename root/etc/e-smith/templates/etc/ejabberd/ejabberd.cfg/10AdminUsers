@@ -1,5 +1,5 @@
 %
 % 10AdminUsers
 %
-\{acl, admin, \{user_regexp, "{ sprintf('^(%s)$', join('|', @jabberadmins)) }"\}\}.
+\{acl, admin, \{user_regexp, "{ sprintf('^(%s)$', join('|', @jabberadmins) || 'root') }"\}\}.
 

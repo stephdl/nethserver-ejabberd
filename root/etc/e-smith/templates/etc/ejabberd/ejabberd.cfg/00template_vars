@@ -2,8 +2,7 @@
     #
     # 00template_vars
     #
-    use esmith::AccountsDB;
-    my %accounts = esmith::AccountsDB->as_hash();
-    @jabberadmins = split(',', $accounts{'jabberadmins'}{'Members'} || '');
+    my ($name,$passwd,$gid,$members) = getgrnam('jabberadmins@'.$DomainName);
+    @jabberadmins = split(' ', $members || '');
     '';
 }
