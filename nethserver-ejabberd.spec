@@ -36,6 +36,7 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/ejabberd
 %files -f %{name}-%{version}-%{release}-filelist 
 %defattr(-,root,root)
 %doc COPYING
+%doc README.rst
 %dir %{_nseventsdir}/%{name}-update
 %attr(0750,ejabberd,ejabberd) %dir %{_localstatedir}/log/ejabberd
 %attr(0750,ejabberd,ejabberd) %dir %{_localstatedir}/lib/ejabberd
