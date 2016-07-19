@@ -33,7 +33,6 @@ my @certificates = (qw(
 
 event_actions('nethserver-ejabberd-update', qw(
               initialize-default-databases   00
-              nethserver-ejabberd-conf       02
 ));
 
 event_templates('nethserver-ejabberd-update', qw(
