@@ -1,6 +1,6 @@
 Summary: NethServer ejabberd XMPP server
 Name: nethserver-ejabberd
-Version: 1.1.1
+Version: 1.1.2
 Release: 1%{?dist}
 License: GPL
 Source: %{name}-%{version}.tar.gz
@@ -54,6 +54,9 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/ejabberd
 
 
 %changelog
+* Fri Oct 14 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.2-1
+- XMPP over bosh does not work - Bug NethServer/dev#5131
+
 * Thu Jul 21 2016 Davide Principi <davide.principi@nethesis.it> - 1.1.1-1
 - Web UI: missing labels - Bug NethServer/dev#5061
 - Can't install nethserver-messaging with nethserver-dc - Bug NethServer/dev#5052
