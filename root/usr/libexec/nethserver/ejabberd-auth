@@ -1,0 +1,53 @@
+#!/usr/bin/perl
+
+#
+# Copyright (C) 2016 Nethesis S.r.l.
+# http://www.nethesis.it - nethserver@nethesis.it
+#
+# This script is part of NethServer.
+#
+# NethServer is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License,
+# or any later version.
+#
+# NethServer is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with NethServer.  If not, see COPYING.
+#
+
+use strict;
+
+my $result = 0;
+my $buf = '';
+
+while(1)
+{
+    my $nread = sysread STDIN, $buf, 2;
+    if($nread != 2) {
+        exit(0);
+    }
+
+    my $len = unpack "n", $buf;
+
+    $nread = sysread STDIN, $buf, $len;
+
+    my ($op, $user, $domain, $password) = split /:/,$buf;
+
+    if($op eq 'auth') {
+        open(my $ah, '| /usr/libexec/nethserver/pam-authenticate');
+        print $ah "$user\@$domain\n$password\n";
+        $result = close($ah);
+    } elsif($op eq 'isuser') {
+        $result = getpwnam("$user\@$domain");
+    } elsif($op eq 'setpass') {
+        $result = 0; # not supported
+    }
+
+    my $out = pack "nn", 2, ($result ? 1 : 0);
+    syswrite STDOUT, $out;
+}

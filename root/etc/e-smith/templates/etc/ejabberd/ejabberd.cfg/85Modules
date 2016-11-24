@@ -39,11 +39,30 @@ HERE
     $OUT .= ${DomainName};
     $OUT .= '"}]},';
     $OUT .= "\n";
- 
-my $sssd = new NethServer::SSSD();
+
+    use NethServer::SSSD;
+    my $sssd = NethServer::SSSD->new();
+
+my $ldap_host = $sssd->host();
+my $ldap_port = $sssd->port();
+my $ldap_encrypt = 'none';
+my $ldap_rootdn = $sssd->bindDN();
+my $ldap_password_escaped = $sssd->bindPassword(); $ldap_password_escaped =~ s/\"/\\"/g;
+
+if($sssd->ldapURI =~ /^ldaps/) {
+    $ldap_encrypt = 'tls';
+}
 
 $OUT.= "  {mod_shared_roster_ldap,[\n";
+$OUT.= "     {ldap_servers, [\"$ldap_host\"]},\n";
+$OUT.= "     {ldap_port, $ldap_port},\n";
+$OUT.= "     {ldap_encrypt, $ldap_encrypt},\n";
 $OUT.= "     {ldap_base, \"".$sssd->baseDN()."\"},\n";
+
+if($sssd->isAD() || $sssd->bindDN()) {
+    $OUT .= "     {ldap_rootdn, \"$ldap_rootdn\"},\n";
+    $OUT .= "     {ldap_password, \"$ldap_password_escaped\"},\n";
+}
 
 if ($sssd->isAD()) {
 #
@@ -51,11 +70,11 @@ if ($sssd->isAD()) {
 #
 $OUT .= <<HERE
      {ldap_groupattr, "sAMAccountName"},
-     {ldap_groupdesc, ""},
+     {ldap_groupdesc, "cn"},
      {ldap_memberattr, "sAMAccountName"},
      {ldap_memberattr_format, "%u"},
      {ldap_useruid, "sAMAccountName"},
-     {ldap_userdesc, "displayName"},
+     {ldap_userdesc, "cn"},
      {ldap_rfilter, "(objectClass=group)"},
      {ldap_gfilter, "(objectClass=user)"},
      {ldap_ufilter, "(&(objectClass=user)(sAMAccountName=%u))"},
