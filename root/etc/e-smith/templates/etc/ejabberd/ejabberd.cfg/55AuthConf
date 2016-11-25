@@ -1,2 +1,8 @@
+%
+% 55AuthConf
+%
 \{auth_method, [external]\}.
 \{extauth_program, "/usr/libexec/nethserver/ejabberd-auth"\}.
+\{extauth_instances, 3\}.
+
+
