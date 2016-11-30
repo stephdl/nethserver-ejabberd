@@ -1,19 +1,8 @@
-{
-  use NethServer::SSSD;
+%
+% 55AuthConf
+%
+\{auth_method, [external]\}.
+\{extauth_program, "/usr/libexec/nethserver/ejabberd-auth"\}.
+\{extauth_instances, 3\}.
 
-  my $sssd = new NethServer::SSSD();
 
-  if ($sssd->host() ) {
-      $OUT .= "{auth_method, [ldap]}.\n";
-      $OUT .= "{ldap_servers, [\"".$sssd->host()."\"]}.\n";
-      $OUT .= "{ldap_port, ".$sssd->port()."}.\n";
-      $OUT .= "{ldap_base, \"".$sssd->baseDN()."\"}.\n";
-      $OUT .= "{ldap_rootdn, \"".$sssd->bindDN()."\"}.\n";
-      $OUT .= "{ldap_password, \"".$sssd->bindPassword()."\"}.\n";
-  }
-
-  if ($sssd->isAD()) {
-      $OUT .= "{ldap_uids, [\"sAMAccountName\"]}.\n";
-  }
-
-}
