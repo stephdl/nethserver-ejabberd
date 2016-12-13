@@ -47,6 +47,8 @@ my $ldap_host = $sssd->host();
 my $ldap_port = $sssd->port();
 my $ldap_encrypt = 'none';
 my $ldap_rootdn = $sssd->bindDN();
+# Escape backslash
+$ldap_rootdn =~ s/\\/\\\\/g;
 my $ldap_password_escaped = $sssd->bindPassword(); $ldap_password_escaped =~ s/\"/\\"/g;
 
 if($sssd->ldapURI =~ /^ldaps/) {
