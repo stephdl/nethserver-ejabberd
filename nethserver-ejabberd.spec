@@ -1,6 +1,6 @@
 Summary: NethServer ejabberd XMPP server
 Name: nethserver-ejabberd
-Version: 1.1.2
+Version: 1.1.3
 Release: 1%{?dist}
 License: GPL
 Source: %{name}-%{version}.tar.gz
@@ -54,6 +54,9 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/ejabberd
 
 
 %changelog
+* Thu Dec 15 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.3-1
+- Enable LDAPs protocol on Active Directory clients - NethServer/dev#5161
+
 * Fri Oct 14 2016 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.2-1
 - XMPP over bosh does not work - Bug NethServer/dev#5131
 
