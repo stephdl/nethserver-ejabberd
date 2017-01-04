@@ -1,19 +1,19 @@
 [Unit]
 Description=XMPP Server
 After=network.target
+After=ejabberd-environment.service
+Requires=ejabberd-environment.service
 
 [Service]
 User=ejabberd
 Group=ejabberd
 LimitNOFILE=16000
 RestartSec=5
-Environment=LOGS_DIR=/var/log/ejabberd 
-Environment=EJABBERD_CONFIG_PATH=/etc/ejabberd/ejabberd.cfg 
-Environment=SPOOL_DIR=/var/lib/ejabberd
-ExecStart=/bin/sh /opt/ejabberd-16.01/bin/ejabberdctl start
-ExecStop=/opt/ejabberd-16.01/bin/ejabberdctl stop
-ExecReload=/opt/ejabberd-16.01/bin/ejabberdctl reload_config
-Type=oneshot
+EnvironmentFile=-/etc/ejabberd/environment
+ExecStart=/bin/sh -c '/opt/ejabberd-${VERSION}/bin/ejabberdctl start'
+ExecStop=/bin/sh -c '/opt/ejabberd-${VERSION}/bin/ejabberdctl stop'
+ExecReload=bin/sh -c '/opt/ejabberd-${VERSION}/bin/ejabberdctl reload_config'
+Type=forking
 RemainAfterExit=yes
 
 [Install]

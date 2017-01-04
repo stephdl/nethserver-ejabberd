@@ -1,0 +1,11 @@
+#!/bin/bash
+
+VERSION=$(/usr/bin/rpm -q --queryformat '%{VERSION}' ejabberd)
+
+cat <<EOF > /etc/ejabberd/environment
+LOGS_DIR=/var/log/ejabberd
+EJABBERD_CONFIG_PATH=/etc/ejabberd/ejabberd.yml
+SPOOL_DIR=/var/lib/ejabberd
+VERSION=$VERSION
+EOF
+

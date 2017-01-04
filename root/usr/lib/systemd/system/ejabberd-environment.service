@@ -1,0 +1,12 @@
+[Unit]
+Description=Set XMPP Server environment
+Before=ejabberd.service
+
+[Service]
+User=ejabberd
+Group=ejabberd
+ExecStart=/usr/libexec/nethserver/ejabberd-setenv
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target

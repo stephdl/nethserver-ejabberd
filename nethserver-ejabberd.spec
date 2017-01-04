@@ -45,9 +45,11 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/ejabberd
 
 %post
 %systemd_post ejabberd.service
+%systemd_post ejabberd-environment.service
 
 %preun
 %systemd_preun ejabberd.service
+%systemd_post ejabberd-environment.service
 
 %postun
 %systemd_postun
