@@ -76,7 +76,7 @@ $OUT .= <<HERE
      {ldap_memberattr, "sAMAccountName"},
      {ldap_memberattr_format, "%u"},
      {ldap_useruid, "sAMAccountName"},
-     {ldap_userdesc, "cn"},
+     {ldap_userdesc, "displayName"},
      {ldap_rfilter, "(objectClass=group)"},
      {ldap_gfilter, "(objectClass=user)"},
      {ldap_ufilter, "(&(objectClass=user)(sAMAccountName=%u))"},
