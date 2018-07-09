@@ -1,7 +1,0 @@
-{
-    $OUT =<<'HERE';
-% Everybody can create pubsub nodes
-{access, pubsub_createnode, [{allow, all}]}.
-HERE
-}
-

@@ -1,8 +1,0 @@
-{
-    if ( ${ejabberd}{XMPPAccess} eq 'tls' ) {
-        $OUT .= "%{s2s_use_starttls, optional}.\n";
-        $OUT .= "%{s2s_certfile, \"/etc/ejabberd/ejabberd.pem\"}.\n";
-        $OUT .= "%{domain_certfile, \"$DomainName\", \"/etc/ejabberd/ejabberd.pem\"}.\n";
-
-   }
-}

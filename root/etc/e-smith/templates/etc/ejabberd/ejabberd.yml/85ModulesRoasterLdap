@@ -1,0 +1,80 @@
+{
+    use NethServer::SSSD;
+    my $sssd = NethServer::SSSD->new();
+
+    my %config;
+    my $ldap_host = $sssd->host();
+    my $ldap_port = $sssd->port();
+    my $ldap_encrypt = 'none';
+    my $ldap_rootdn = $sssd->bindDN();
+    my $displayGroups = $ejabberd{'DisplayGroups'} || 'disabled';
+    # Escape backslash
+    $ldap_rootdn =~ s/\\/\\\\/g;
+    my $ldap_password_escaped = $sssd->bindPassword(); $ldap_password_escaped =~ s/\"/\\"/g;
+
+    if($sssd->ldapURI =~ /^ldaps/) {
+        $ldap_encrypt = 'tls';
+    }
+
+
+    $config{'ldap_servers'} = $ldap_host;
+    $config{'ldap_port'} = $ldap_port;
+    $config{'ldap_encrypt'} =  $ldap_encrypt;
+    $config{'ldap_base'} = $sssd->baseDN();
+
+    if($sssd->isAD() || $sssd->bindDN()) {
+        $config{'ldap_rootdn'} = $ldap_rootdn;
+        $config{'ldap_password'} = $ldap_password_escaped;
+    }
+
+
+    if ($sssd->isAD()) {
+        #
+        # Groups are not supported, also user names are not available
+        #
+        $config{'ldap_groupattr'} = "sAMAccountName";
+        $config{'ldap_groupdesc'} = "cn";
+        $config{'ldap_memberattr'} = "sAMAccountName";
+        $config{'ldap_memberattr_format'} =  "%u";
+        $config{'ldap_useruid'} = "sAMAccountName";
+        $config{'ldap_userdesc'} = "displayName";
+        $config{'ldap_rfilter'} = "(objectClass=group)";
+        $config{'ldap_gfilter'} = "(objectClass=user)";
+        $config{'ldap_ufilter'} = "(&(objectClass=user)(sAMAccountName=%u))";
+        $config{'ldap_filter'} = "(!(objectClass=computer))";
+    } else {
+        if ($displayGroups eq 'enabled') {
+            $config{'ldap_rfilter'} =  "(objectClass=posixGroup)";
+            $config{'ldap_filter'} =  "";
+            $config{'ldap_gfilter'} =  "(&(objectClass=posixGroup)(cn=%g)(!(cn=locals)))";
+            $config{'ldap_groupdesc' } = "cn";
+            $config{'ldap_memberattr' } = "memberUid";
+            $config{'ldap_groupattr'} =  "cn";
+            $config{'ldap_ufilter'} = "(&(objectClass=posixAccount)(cn=%u))";
+            $config{'ldap_userdesc'} = "gecos";
+        } else {
+            $config{'ldap_groupattr'} =  "cn";
+            $config{'ldap_groupdesc' } = "o";
+            $config{'ldap_useruid'} = "uid";
+            $config{'ldap_ufilter'} = "(uid=%u)";
+            $config{'ldap_rfilter'} =  "(objectClass=posixAccount)";
+            $config{'ldap_memberattr'} = "uid";
+            $config{'ldap_memberattr_format'} = "%u";
+        }
+    }
+    $OUT .= "  mod_shared_roster_ldap:\n";
+    # Some options does not want double quote or must use brackets
+    foreach $key (sort keys %config) {
+        if (($key eq 'ldap_encrypt') ||
+            ($key eq 'ldap_port')) {
+
+            $OUT .= "     $key: $config{$key}\n";
+        }
+        elsif ($key eq 'ldap_servers')  {
+            $OUT .= "     $key: \[\"$config{$key}\"\]\n";
+        }
+        else {
+            $OUT .= "     $key: \"$config{$key}\"\n";
+        }
+    }
+}

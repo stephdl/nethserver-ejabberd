@@ -36,6 +36,7 @@ event_actions('nethserver-ejabberd-update', qw(
 ));
 
 event_templates('nethserver-ejabberd-update', qw(
+                /etc/ejabberd/ejabberd.yml
                 /etc/ejabberd/ejabberd.cfg
                 /etc/dnsmasq.conf
 ), @certificates);
@@ -55,17 +56,17 @@ $event = "nethserver-ejabberd-save";
 
 event_services($event, 'ejabberd' => 'restart');
 event_services($event, 'httpd' => 'reload');
-templates2events("/etc/ejabberd/ejabberd.cfg",  $event);
+templates2events("/etc/ejabberd/ejabberd.yml",  $event);
 
 
 #--------------------------------------------------
-# actions for group-modify event
+# actions for group-modify group-create group-delete event
 # Restart ejabberd on jabberadmins group update
 #--------------------------------------------------
 
-$event = "group-modify";
-
-event_actions($event, 'nethserver-ejabberd-update-group' => '90');
+foreach $event (qw (group-modify group-create group-delete)){
+event_actions($event, 'nethserver-ejabberd-update-group' => '95');
+}
 
 #--------------------------------------------------
 # actions for migration-import event

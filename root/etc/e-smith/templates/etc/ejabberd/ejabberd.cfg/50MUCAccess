@@ -1,8 +1,0 @@
-{
-    $OUT =<<'HERE';
-% All users are allowed to use MUC service:
-{access, muc, [{allow, all}]}.
-{access, muc_log, [{allow, admin}, {deny, all}]}.
-HERE
-}
-
