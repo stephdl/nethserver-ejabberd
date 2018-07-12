@@ -6,7 +6,7 @@
 
     # Props no more used
     my $WelcomeSubject = $db->get_prop_and_delete('ejabberd','WelcomeSubject');
-    my $WelComeText = $db->get_prop_and_delete('ejabberd','WelComeText');
+    my $WelcomeText = $db->get_prop_and_delete('ejabberd','WelcomeText');
     my $XMPPAccess = $db->get_prop_and_delete('ejabberd','XMPPAccess');
 
     # Add the S2S port if not existing
