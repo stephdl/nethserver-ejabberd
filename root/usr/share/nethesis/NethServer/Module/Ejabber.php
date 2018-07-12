@@ -41,8 +41,8 @@ class Ejabber extends \Nethgui\Controller\AbstractController
         $this->declareParameter('status', Validate::SERVICESTATUS, array('configuration', 'ejabberd', 'status'));
         $this->declareParameter('WebAdmin', Validate::SERVICESTATUS, array('configuration', 'ejabberd', 'WebAdmin'));
         $this->declareParameter('S2S', Validate::SERVICESTATUS, array('configuration', 'ejabberd', 'S2S'));
-        $this->declareParameter('shaperFast', Validate::POSITIVE_INTEGER, array('configuration', 'ejabberd', 'shaperFast'));
-        $this->declareParameter('shaperNormal', Validate::POSITIVE_INTEGER, array('configuration', 'ejabberd', 'shaperNormal'));
+        $this->declareParameter('ShaperFast', Validate::POSITIVE_INTEGER, array('configuration', 'ejabberd', 'ShaperFast'));
+        $this->declareParameter('ShaperNormal', Validate::POSITIVE_INTEGER, array('configuration', 'ejabberd', 'ShaperNormal'));
     }
 
     public function validate(\Nethgui\Controller\ValidationReportInterface $report)
@@ -50,8 +50,8 @@ class Ejabber extends \Nethgui\Controller\AbstractController
         if ( ! $this->getRequest()->isMutation()) {
             return;
         }
-        elseif  ($this->parameters['shaperFast'] <= $this->parameters['shaperNormal']) {
-            $report->addValidationErrorMessage($this, 'shaperFast', 'shaperFastMustBeSuperiorThanshaperNormal');
+        elseif  ($this->parameters['ShaperFast'] <= $this->parameters['ShaperNormal']) {
+            $report->addValidationErrorMessage($this, 'ShaperFast', 'ShaperFastMustBeSuperiorThanshaperNormal');
         }
         parent::validate($report);
     }
