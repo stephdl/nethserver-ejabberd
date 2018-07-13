@@ -44,7 +44,6 @@ $OUT .= q(
     module: ejabberd_s2s_in
     max_stanza_size: 131072
     shaper: s2s_shaper
-    tls: true
     protocol_options: 'TLSOPTS'
 
 s2s_use_starttls: required
