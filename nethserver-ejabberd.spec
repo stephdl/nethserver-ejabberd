@@ -44,6 +44,7 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd
 %attr(0750,ejabberd,ejabberd) %dir %{_sysconfdir}/ejabberd
 %attr(0640,ejabberd,ejabberd) %ghost %{_sysconfdir}/ejabberd/ejabberd.yml
 %attr(0640,ejabberd,ejabberd) %{_sysconfdir}/ejabberd/inetrc
+%attr(0755,root,root) %{_sysconfdir}/cron.daily/ejabberd-purge-mod_mam-database
 %attr(0750,ejabberd,ejabberd) %dir %{_localstatedir}/lib/nethserver/ejabberd
 
 %post
