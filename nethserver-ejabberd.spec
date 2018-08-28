@@ -1,6 +1,6 @@
 Summary: NethServer ejabberd XMPP server
 Name: nethserver-ejabberd
-Version: 1.1.5
+Version: 1.2.0
 Release: 1%{?dist}
 License: GPL
 Source: %{name}-%{version}.tar.gz
@@ -58,6 +58,9 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd
 
 
 %changelog
+* Tue Aug 28 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.2.0-1
+- Ejabberd: upgrade to 18.06 - NethServer/dev#5537
+
 * Mon May 22 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.5-1
 - Default userPrincipalName is not an email address - Bug NethServer/dev#5284
 - Set user name as DisplayName
