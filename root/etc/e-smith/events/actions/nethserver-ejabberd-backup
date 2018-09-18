@@ -20,4 +20,11 @@
 # along with NethServer.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-/opt/ejabberd-*/bin/ejabberdctl backup /var/lib/nethserver/ejabberd/ejabberd.backup
+# Test if the service is running before to backup
+/usr/bin/systemctl is-active --quiet ejabberd
+if [[ $? -eq 0 ]]; then
+    /opt/ejabberd-*/bin/ejabberdctl backup /var/lib/nethserver/ejabberd/ejabberd.backup
+else
+    echo 'Ejabberd is not running, backup is not possible'
+    exit 0
+fi
