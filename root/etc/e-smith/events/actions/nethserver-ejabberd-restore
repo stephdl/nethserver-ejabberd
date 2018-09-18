@@ -19,6 +19,18 @@
 # You should have received a copy of the GNU General Public License
 # along with NethServer.  If not, see <http://www.gnu.org/licenses/>.
 #
-if [ -f /var/lib/nethserver/ejabberd/ejabberd.backup ]; then
-    /opt/ejabberd-*/bin/ejabberdctl install_fallback /var/lib/nethserver/ejabberd/ejabberd.backup >/dev/null
+
+# Test if the service is running before to restore
+/usr/bin/systemctl is-active --quiet ejabberd
+
+if [[ $? -eq 0 ]]; then
+    if [ -f /var/lib/nethserver/ejabberd/ejabberd.backup ]; then
+        /opt/ejabberd-*/bin/ejabberdctl install_fallback /var/lib/nethserver/ejabberd/ejabberd.backup >/dev/null
+    else
+        echo 'The backup file is not available'
+        exit 0
+    fi
+else
+    echo 'Ejabberd is not running, restore is not possible'
+    exit 0
 fi
