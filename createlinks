@@ -58,6 +58,15 @@ event_services($event, 'ejabberd' => 'restart');
 event_services($event, 'httpd' => 'reload');
 templates2events("/etc/ejabberd/ejabberd.yml",  $event);
 
+#--------------------------------------------------
+# actions for tls-policy-save event
+#--------------------------------------------------
+
+$event = "tls-policy-save";
+
+event_services($event, 'ejabberd' => 'restart');
+templates2events("/etc/ejabberd/ejabberd.yml",  $event);
+
 
 #--------------------------------------------------
 # actions for group-modify group-create group-delete event
