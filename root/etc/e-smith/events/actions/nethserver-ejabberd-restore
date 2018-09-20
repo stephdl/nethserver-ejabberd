@@ -27,12 +27,10 @@ if [[ $? -eq 0 ]]; then
     if [ -f /var/lib/nethserver/ejabberd/ejabberd.backup ]; then
         /opt/ejabberd-*/bin/ejabberdctl install_fallback /var/lib/nethserver/ejabberd/ejabberd.backup >/dev/null
     else
-        echo 'The backup file is not available, restore is not possible'
+        echo 'The backup file is not available'
         exit 0
     fi
-fi
-
-if [[ $? -ne 0 ]]; then
+else
     echo 'Ejabberd is not running, restore is not possible'
     exit 0
 fi
