@@ -49,5 +49,6 @@ $OUT .= q(  -
     protocol_options: 'TLSOPTS'
     ciphers: 'CIPHERS');
 }
+}
 
 s2s_use_starttls: required
