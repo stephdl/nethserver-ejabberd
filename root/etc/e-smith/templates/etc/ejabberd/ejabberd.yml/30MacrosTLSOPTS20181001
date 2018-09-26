@@ -1,0 +1,11 @@
+{
+
+my $tlsPolicy = $tls{'policy'} || '0';
+
+if ($tlsPolicy >= 20181001) {
+    $OUT .=q(  'TLSOPTS':
+    - "no_sslv3"
+    - "no_tlsv1"
+    - "cipher_server_preference");
+}
+}
