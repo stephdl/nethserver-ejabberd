@@ -37,6 +37,7 @@ listen:
     web_admin: {((${ejabberd}{WebAdmin} || '') eq 'enabled') ? "true" : "false";}
     http_bind: true
     captcha: false
+    protocol_options: 'TLSOPTS'
     ciphers: 'CIPHERS'
 {
 if ($ejabberd{'S2S'} eq 'enabled') {
