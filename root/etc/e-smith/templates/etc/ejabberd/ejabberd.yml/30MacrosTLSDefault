@@ -1,8 +1,10 @@
 {
 
-my $tlsPolicy = $tls{'policy'} || '';
+my $tlsPolicy = $tls{'policy'} || '0';
 
-if ($tlsPolicy eq '') {
+if (($tlsPolicy == 0 ) ||
+    ($tlsPolicy == 20180330 ) ||
+    ($tlsPolicy == 20180621 )) {
     $OUT .=q(
 #
 # TLS policy default
@@ -10,8 +12,7 @@ if ($tlsPolicy eq '') {
 
 define_macro:
   'CERTFILE': "/etc/ejabberd/ejabberd.pem"
-  'TLSOPTS':
-    - "no_sslv3"
+  'TLSOPTS': "no_sslv3"
   'CIPHERS': null
 );
 }
