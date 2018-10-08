@@ -58,6 +58,18 @@ event_services($event, 'ejabberd' => 'restart');
 event_services($event, 'httpd' => 'reload');
 templates2events("/etc/ejabberd/ejabberd.yml",  $event);
 
+
+#
+# nethserver-sssd-save event
+#
+event_templates('nethserver-sssd-save',qw(
+    /etc/ejabberd/ejabberd.yml
+));
+
+event_services('nethserver-sssd-save', qw(
+    ejabberd restart
+));
+
 #--------------------------------------------------
 # actions for tls-policy-save event
 #--------------------------------------------------
