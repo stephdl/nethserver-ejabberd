@@ -1,0 +1,10 @@
+{
+    "version": 0,
+    "priority": 10,
+    "menu": {
+        "index": {
+            "label": "NethServer Ejabberd",
+            "order": 40
+        }
+    }
+}
