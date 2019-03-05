@@ -1,6 +1,6 @@
 Summary: NethServer ejabberd XMPP server
 Name: nethserver-ejabberd
-Version: 1.3.1
+Version: 1.4.0
 Release: 1%{?dist}
 License: GPL
 Source0: %{name}-%{version}.tar.gz
@@ -68,6 +68,9 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd
 
 
 %changelog
+* Tue Mar 05 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.4.0-1
+- Ejabberd Cockpit UI - NethServer/dev#5719
+
 * Mon Oct 08 2018 Davide Principi <davide.principi@nethesis.it> - 1.3.1-1
 - Ejabberd: warning in log with policies 20180621 & 20180330 - Bug NethServer/dev#5601
 - Package nethserver-X must subscribe nethserver-sssd-save - NethServer/dev#5600
