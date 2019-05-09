@@ -18,7 +18,7 @@
         $('#loader').show();
         $('#empty').hide();
         $('#content').hide();
-        
+
         // get stats
         nethserver.exec(
             ["nethserver-ejabberd/read"],
@@ -58,7 +58,7 @@
     } // end getDashboard
 
     function getConfiguration() {
-        
+
         function doRead() {
             $('#config-loader').hide();
             nethserver.exec(
@@ -98,13 +98,13 @@
                 }
             );
         }
-        
+
         function doUpdate() {
             $('#config-loader').show();
             $('.form-group .help-block').hide();
             $('.form-group').removeClass('has-error');
             $('#validation-error-notification').hide();
-            
+
             var data = {"configuration":{"props":{
                 "status": $("#config-service-switch").is(':checked') ? 'enabled' : 'disabled',
                 "WebAdmin": $("#config-webadmin-switch").is(':checked') ? 'enabled' : 'disabled',
@@ -176,7 +176,7 @@
             "onText": _('switch_label_on'),
             "offText": _('switch_label_off')
         });
-        
+
         $(".bootstrap-touchspin").TouchSpin({
             min: 0,
             max: 9999,
@@ -351,23 +351,26 @@
         this.use('Template');
 
         this.get('#/', function (context) {
+            localStorage.setItem("path", '');
             this.partial('views/dashboard.html', {}, getDashboard);
         });
 
         this.get('#/configuration', function (context) {
+            localStorage.setItem("path", 'configuration');
             this.partial('views/configuration.html', {}, getConfiguration);
         });
 
         this.get('#/logs', function (context) {
+            localStorage.setItem("path", 'logs');
             this.partial('views/logs.html', {}, getLogs);
         });
 
         this.get('#/about', function (context) {
+            localStorage.setItem("path", 'about');
             this.partial('views/about.html', {}, getAbout);
         });
 
         this.before('.*', function () {
-
             var hash = document.location.hash.replace("/", "");
             hash = hash == '#' ? '#dashboard' : hash
             $("nav>ul>li").removeClass("active");
@@ -378,7 +381,9 @@
 
     nethserver.fetchTranslatedStrings(function (data) {
         LANG_OBJ = data;
-        app.run('#/');
+
+        var path = localStorage.getItem("path") || '';
+        app.run('#/' + path);
     });
 
 })(jQuery));
