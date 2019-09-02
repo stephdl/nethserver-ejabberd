@@ -26,6 +26,7 @@ NethServer configuration of ejabberd XMPP server
 %build
 %{makedocs}
 perl createlinks
+sed -i 's/_RELEASE_/%{version}/' %{name}.json
 
 %install
 (cd root ; find . -depth -print | cpio -dump %{buildroot})
@@ -44,7 +45,7 @@ mkdir -p %{buildroot}/%{_sysconfdir}/ejabberd
 mkdir -p %{buildroot}/%{_localstatedir}/lib/ejabberd
 mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd
 
-%files -f %{name}-%{version}-%{release}-filelist 
+%files -f %{name}-%{version}-%{release}-filelist
 %defattr(-,root,root)
 %doc COPYING
 %doc README.rst
