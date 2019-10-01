@@ -1,6 +1,6 @@
 Summary: NethServer ejabberd XMPP server
 Name: nethserver-ejabberd
-Version: 1.4.1
+Version: 1.5.0
 Release: 1%{?dist}
 License: GPL
 Source0: %{name}-%{version}.tar.gz
@@ -71,6 +71,9 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd
 
 
 %changelog
+* Tue Oct 01 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.0-1
+- Sudoers based authorizations for Cockpit UI - NethServer/dev#5805
+
 * Tue Sep 03 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.4.1-1
 - Cockpit. List correct application version - Nethserver/dev#5819
 
