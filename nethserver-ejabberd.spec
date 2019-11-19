@@ -78,10 +78,10 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd
 - Cockpit. List correct application version - Nethserver/dev#5819
 
 * Tue Mar 05 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.4.0-1
-- Ejabberd Cockpit UI - NethServer/dev#5719
+- ejabberd Cockpit UI - NethServer/dev#5719
 
 * Mon Oct 08 2018 Davide Principi <davide.principi@nethesis.it> - 1.3.1-1
-- Ejabberd: warning in log with policies 20180621 & 20180330 - Bug NethServer/dev#5601
+- ejabberd: warning in log with policies 20180621 & 20180330 - Bug NethServer/dev#5601
 - Package nethserver-X must subscribe nethserver-sssd-save - NethServer/dev#5600
 
 * Fri Sep 28 2018 Davide Principi <davide.principi@nethesis.it> - 1.3.0-1
@@ -89,7 +89,7 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd
 - TLS policy and ejabberd: new policy 2018-10-01 - NethServer/dev#5580
 
 * Tue Aug 28 2018 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.2.0-1
-- Ejabberd: upgrade to 18.06 - NethServer/dev#5537
+- ejabberd: upgrade to 18.06 - NethServer/dev#5537
 
 * Mon May 22 2017 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.1.5-1
 - Default userPrincipalName is not an email address - Bug NethServer/dev#5284

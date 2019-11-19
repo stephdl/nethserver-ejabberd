@@ -1,8 +1,8 @@
 {
     "id": "nethserver-ejabberd",
-    "name": "Ejabberd",
-    "summary": "Ejabberd XMPP server configuration for NethServer",
-    "description": "Ejabberd XMPP server configuration for NethServer",
+    "name": "ejabberd",
+    "summary": "ejabberd XMPP server configuration for NethServer",
+    "description": "ejabberd XMPP server configuration for NethServer",
     "url": "",
     "homepage": "https://github.com/NethServer/nethserver-ejabberd",
     "provides": ["nethserver-ejabberd"],

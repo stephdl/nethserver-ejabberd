@@ -2,7 +2,7 @@
 nethserver-ejabberd
 ===================
 
-The chat function is implemented using ejabberd jabber server. Enabled features are:
+The chat function is implemented using ejabberd XMPP server. Enabled features are:
 
 * ldap based roster
 * ssl
@@ -38,7 +38,7 @@ You need a user inside jabberadmins group to login.
 Default access to server ports is set to public on following ports: 5280, 5222, 5223.
 
 
-The jabber server can be accessed using BOSH protocol (https://xmpp.org/extensions/xep-0206.html) at URL ``/http-bind``.
+The XMPP server can be accessed using BOSH protocol (https://xmpp.org/extensions/xep-0206.html) at URL ``/http-bind``.
 
 Example:
 
