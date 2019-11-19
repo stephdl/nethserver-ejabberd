@@ -1,5 +1,5 @@
 [Unit]
-Description=XMPP Server
+Description=ejabberd XMPP Server
 After=network.target
 
 [Service]
