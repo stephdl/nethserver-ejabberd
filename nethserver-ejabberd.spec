@@ -1,6 +1,6 @@
 Summary: NethServer ejabberd XMPP server
 Name: nethserver-ejabberd
-Version: 1.5.0
+Version: 1.5.1
 Release: 1%{?dist}
 License: GPL
 Source0: %{name}-%{version}.tar.gz
@@ -71,6 +71,9 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd
 
 
 %changelog
+* Thu Nov 21 2019 Davide Principi <davide.principi@nethesis.it> - 1.5.1-1
+- Ejabberd password auth fails with special chars - Bug NethServer/dev#5931
+
 * Tue Oct 01 2019 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.5.0-1
 - Sudoers based authorizations for Cockpit UI - NethServer/dev#5805
 
