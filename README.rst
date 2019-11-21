@@ -11,6 +11,11 @@ The chat function is implemented using ejabberd XMPP server. Enabled features ar
 If you want to give admin permissions to an existing user, just add the user to the special group ``jabberadmins``.
 The ``jabberadmins`` must be created manually.
 
+If the system has a remote account provider also reconfigure the ejabberd service: ::
+
+    sss_cache -g jabberadmins
+    signal-event nethserver-ejabberd-save
+
 When used with AD backend, following limitations apply:
 
 * The shared roster doesn't support groups
