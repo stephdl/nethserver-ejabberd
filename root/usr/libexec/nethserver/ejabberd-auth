@@ -36,7 +36,7 @@ while(1)
 
     $nread = sysread STDIN, $buf, $len;
 
-    my ($op, $user, $domain, $password) = split /:/,$buf;
+    my ($op, $user, $domain, $password) = split(/:/, $buf, 4);
 
     if($op eq 'auth') {
         open(my $ah, '| /usr/libexec/nethserver/pam-authenticate');
