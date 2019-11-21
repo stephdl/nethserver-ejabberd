@@ -1,7 +1,7 @@
 {
     "id": "nethserver-ejabberd",
     "name": "ejabberd",
-    "summary": "Nethserver integration of ejabberd XMPP server",
+    "summary": "NethServer integration of ejabberd XMPP server",
     "description": "Provides ejabberd XMPP server",
     "url": "",
     "homepage": "https://github.com/NethServer/nethserver-ejabberd",
