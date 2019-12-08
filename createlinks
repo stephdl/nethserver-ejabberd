@@ -122,3 +122,10 @@ $event = 'post-restore-data';
 
 event_actions($event, 'nethserver-ejabberd-restore' => 50);
 event_services($event, 'ejabberd' => 'restart');
+
+#--------------------------------------------------
+# password-modify event
+#--------------------------------------------------
+event_actions('password-modify', qw(
+              nethserver-ejabberd-clearCache 90
+));
