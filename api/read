@@ -20,7 +20,7 @@
 # along with NethServer.  If not, see COPYING.
 #
 
-ejabberdctl="/opt/ejabberd-18.06/bin/ejabberdctl"
+ejabberdctl="/opt/ejabberd-20.01/bin/ejabberdctl"
 
 configuration="{}"
 status="{}"
@@ -39,5 +39,3 @@ for action in $(jq -r '.sections[]' -); do
 done
 
 printf '{"configuration":%s,"status":%s}' "${configuration}" "${status}"
-
-
