@@ -3,4 +3,5 @@ auth_method: external
 extauth_program: "/usr/libexec/nethserver/ejabberd-auth"
 # Number of processus (introduced by 18.06)
 extauth_pool_size: 4
-
+# Do not cache authentication (introduced by 20.01)
+auth_use_cache: false
