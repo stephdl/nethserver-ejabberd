@@ -34,8 +34,7 @@ listen:
       "/websocket": ejabberd_http_ws
       "/api": mod_http_api
       "/bosh": mod_bosh
-    web_admin: {((${ejabberd}{WebAdmin} || '') eq 'enabled') ? "true" : "false";}
-    http_bind: true
+      {$OUT .='"/admin": ejabberd_web_admin' if ((${ejabberd}{WebAdmin} || '') eq 'enabled');}
     captcha: false
     protocol_options: 'TLSOPTS'
     ciphers: 'CIPHERS'
