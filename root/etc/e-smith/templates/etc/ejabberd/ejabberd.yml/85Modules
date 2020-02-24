@@ -67,5 +67,11 @@ if ($ejabberd{'ModHttpUploadStatus'} eq 'enabled'){
     docroot: "/var/lib/nethserver/ejabberd/upload/"
     put_url: "https://@HOST@:5443/upload"
 );
+    if ($ejabberd{'ModHttpUploadQuotaStatus'} eq 'enabled'){
+            $OUT .= qq(
+  mod_http_upload_quota:
+    max_days: $ejabberd{'ModHttpUploadQuotaMaxDay'}
+);
+    }
 }
 }
