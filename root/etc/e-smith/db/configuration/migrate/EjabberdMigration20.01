@@ -1,0 +1,12 @@
+{
+    # This migrate fragment is for the upgrade from 18.06 to 20.01
+
+    use esmith::ConfigDB;
+    my $db = esmith::ConfigDB->open() || die "Can't open config database: $!\n";
+
+    # Add the 5443 port if not existing
+    my $TCP = $db->get_prop('ejabberd','TCPPorts') || '';
+    if ($TCP !~ '5443') {
+        $db->set_prop('ejabberd','TCPPorts', '5222,5223,5269,5280,5443');
+    }
+}
