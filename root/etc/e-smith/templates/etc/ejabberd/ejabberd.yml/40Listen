@@ -63,4 +63,3 @@ $OUT .= q(  -
 );
 }
 }
-s2s_use_starttls: required
