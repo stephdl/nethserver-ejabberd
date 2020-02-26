@@ -74,6 +74,30 @@
                     <span id="config-retention-value-error" class="help-block"></span>
                 </div>
             </div>
+
+            <div class="form-group hidden">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" id="config-upload-switch"> <span i18n="configuration_upload_label">Enable file upload (mod_http_upload)</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="progressive-disclosure-container pdc-switch-observer" data-pdc-switch="config-upload-switch">
+                        <span class="checkbox inline">
+                            <label>
+                                <input type="checkbox" id="config-upload-retention-switch"> 
+                                <span i18n="configuration_upload_retention_label">Clean files older than</span>
+                             </label>
+                        </span>
+                        <input class="bootstrap-touchspin inline" id="config-upload-retention-value" type="text" value="" required="required">
+                    </div>
+                </div>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <span id="config-upload-retention-value-error" class="help-block"></span>
+                </div>
+            </div>
             
             <div class="form-group hidden">
                 <div class="col-sm-12" i18n="configuration_shaper_title">File transfer speed (bytes/second)</div>
