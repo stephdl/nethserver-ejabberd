@@ -37,7 +37,6 @@
         $config{'ldap_rfilter'} = "(objectCategory=group)";
         $config{'ldap_gfilter'} = "(objectCategory=user)";
         $config{'ldap_ufilter'} = "(&(objectClass=user)(sAMAccountName=%u))";
-        $config{'ldap_filter'} = "";
     } else {
         $config{'ldap_groupattr'} =  "cn";
         $config{'ldap_groupdesc' } = "o";

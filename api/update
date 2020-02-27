@@ -45,6 +45,9 @@ foreach my $prop (qw(
     ModMamPurgeDBInterval
     ShaperFast
     ShaperNormal
+    ModHttpUploadStatus
+    ModHttpUploadQuotaStatus
+    ModHttpUploadQuotaMaxDay
 )) {
     $cdb->set_prop('ejabberd', $prop, $data->{$prop});
 }

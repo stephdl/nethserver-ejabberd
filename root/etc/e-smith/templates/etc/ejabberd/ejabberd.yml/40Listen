@@ -34,8 +34,7 @@ listen:
       "/websocket": ejabberd_http_ws
       "/api": mod_http_api
       "/bosh": mod_bosh
-    web_admin: {((${ejabberd}{WebAdmin} || '') eq 'enabled') ? "true" : "false";}
-    http_bind: true
+      {$OUT .='"/admin": ejabberd_web_admin' if ((${ejabberd}{WebAdmin} || '') eq 'enabled');}
     captcha: false
     protocol_options: 'TLSOPTS'
     ciphers: 'CIPHERS'
@@ -48,8 +47,19 @@ $OUT .= q(  -
     max_stanza_size: 131072
     shaper: s2s_shaper
     protocol_options: 'TLSOPTS'
-    ciphers: 'CIPHERS');
+    ciphers: 'CIPHERS'
+);
+}
+if ($ejabberd{'ModHttpUploadStatus'} eq 'enabled') {
+$OUT .= q(  - 
+    port: 5443
+    ip: "0.0.0.0"
+    module: ejabberd_http
+    tls: true
+    protocol_options: 'TLSOPTS'
+    ciphers: 'CIPHERS'
+    request_handlers:
+        "/upload": mod_http_upload
+);
 }
 }
-
-s2s_use_starttls: required

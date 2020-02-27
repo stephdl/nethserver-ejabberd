@@ -36,6 +36,7 @@
     "valid_shaper_limits": "Must be greater than the Normal speed value",
     "validation_error_title": "Form validation error!",
     "validation_error_description": "The form values cannot be saved: check the input fields values for correctness.",
-    "logs_follow_btn": "Follow"
-    
+    "logs_follow_btn": "Follow",
+    "configuration_upload_label":"Enable file upload (mod_http_upload)",
+    "configuration_upload_retention_label": "Clean files older than"
 }

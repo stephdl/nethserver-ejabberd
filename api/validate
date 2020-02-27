@@ -33,6 +33,9 @@ $v = createValidator($p)
     ->declareParameter('ShaperNormal', Validate::POSITIVE_INTEGER)
     ->declareParameter('ModMamPurgeDBStatus', Validate::SERVICESTATUS)
     ->declareParameter('ModMamStatus', Validate::SERVICESTATUS)
+    ->declareParameter('ModHttpUploadStatus', Validate::SERVICESTATUS)
+    ->declareParameter('ModHttpUploadQuotaStatus', Validate::SERVICESTATUS)
+    ->declareParameter('ModHttpUploadQuotaMaxDay', Validate::POSITIVE_INTEGER)
     ->declareParameter('ModMamPurgeDBInterval', Validate::POSITIVE_INTEGER)
 ;
 

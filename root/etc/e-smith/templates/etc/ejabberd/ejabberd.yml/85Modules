@@ -60,4 +60,18 @@ if ($ejabberd{ModMamStatus} eq 'enabled'){
   mod_stream_mgmt: \{\}
   mod_s2s_dialback: \{\}
   mod_http_api: \{\}
-
+{
+if ($ejabberd{'ModHttpUploadStatus'} eq 'enabled'){
+    $OUT .= q(
+  mod_http_upload:
+    docroot: "/var/lib/nethserver/ejabberd/upload/"
+    put_url: "https://@HOST@:5443/upload"
+);
+    if ($ejabberd{'ModHttpUploadQuotaStatus'} eq 'enabled'){
+            $OUT .= qq(
+  mod_http_upload_quota:
+    max_days: $ejabberd{'ModHttpUploadQuotaMaxDay'}
+);
+    }
+}
+}

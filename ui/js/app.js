@@ -75,16 +75,21 @@
                         var s2sStatus = data['configuration']['props']['S2S'] == 'enabled';
                         var modMamStatus = data['configuration']['props']['ModMamStatus'] == 'enabled';
                         var retentionStatus = data['configuration']['props']['ModMamPurgeDBStatus'] == 'enabled';
+                        var modHttpUploadStatus = data['configuration']['props']['ModHttpUploadStatus'] == 'enabled';
+                        var uploadQuotaStatus = data['configuration']['props']['ModHttpUploadQuotaStatus'] == 'enabled';
 
                         $('#config-service-switch').attr('checked', serviceStatus).trigger('change');
                         $('#config-webadmin-switch').attr('checked', webAdminStatus).trigger('change');
                         $('#config-federation-switch').attr('checked', s2sStatus).trigger('change');
                         $('#config-archive-switch').attr('checked', modMamStatus).trigger('change');
                         $('#config-retention-switch').attr('checked', retentionStatus).trigger('change');
+                        $('#config-upload-switch').attr('checked', modHttpUploadStatus).trigger('change');
+                        $('#config-upload-retention-switch').attr('checked', uploadQuotaStatus).trigger('change');
 
                         $('#config-shaperfast-text').val(data['configuration']['props']['ShaperFast']);
                         $('#config-shapernormal-text').val(data['configuration']['props']['ShaperNormal']);
                         $('#config-retention-value').val(data['configuration']['props']['ModMamPurgeDBInterval']);
+                        $('#config-upload-retention-value').val(data['configuration']['props']['ModHttpUploadQuotaMaxDay']);
 
                     } catch (e) {
                         console.error(e);
@@ -112,6 +117,9 @@
                 "ModMamStatus": $("#config-archive-switch").is(':checked') ? 'enabled' : 'disabled',
                 "ModMamPurgeDBStatus": $("#config-retention-switch").is(':checked') ? 'enabled' : 'disabled',
                 "ModMamPurgeDBInterval": $("#config-retention-value").val(),
+                "ModHttpUploadStatus": $("#config-upload-switch").is(':checked') ? 'enabled' : 'disabled',
+                "ModHttpUploadQuotaStatus": $("#config-upload-retention-switch").is(':checked') ? 'enabled' : 'disabled',
+                "ModHttpUploadQuotaMaxDay": $("#config-upload-retention-value").val(),
                 "ShaperFast": $("#config-shaperfast-text").val(),
                 "ShaperNormal": $("#config-shapernormal-text").val(),
             }}};
@@ -156,6 +164,8 @@
                                 id = 'config-shapernormal-text';
                             } else if (attr.parameter == 'ModMamPurgeDBInterval') {
                                 id = 'config-retention-value';
+                            } else if (attr.parameter == 'ModHttpUploadQuotaMaxDay') {
+                                id = 'config-upload-retention-value';
                             }
                             $('#' + id).closest('.form-group').addClass('has-error');
                             $('#' + id + '-error').text(_(attr.error)).show();

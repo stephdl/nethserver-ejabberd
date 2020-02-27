@@ -14,7 +14,7 @@ Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
 
-Requires: ejabberd = 18.06
+Requires: ejabberd = 20.01
 Requires: nethserver-httpd
 
 %description
@@ -46,6 +46,7 @@ mkdir -p %{buildroot}/%{_localstatedir}/log/ejabberd
 mkdir -p %{buildroot}/%{_sysconfdir}/ejabberd
 mkdir -p %{buildroot}/%{_localstatedir}/lib/ejabberd
 mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd
+mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd/upload
 
 %files -f %{name}-%{version}-%{release}-filelist
 %defattr(-,root,root)
@@ -59,6 +60,7 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd
 %attr(0640,ejabberd,ejabberd) %{_sysconfdir}/ejabberd/inetrc
 %attr(0755,root,root) %{_sysconfdir}/cron.daily/ejabberd-purge-mod_mam-database
 %attr(0750,ejabberd,ejabberd) %dir %{_localstatedir}/lib/nethserver/ejabberd
+%attr(0750,ejabberd,ejabberd) %dir %{_localstatedir}/lib/nethserver/ejabberd/upload
 
 %post
 %systemd_post ejabberd.service
