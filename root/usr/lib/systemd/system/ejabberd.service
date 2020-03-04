@@ -11,6 +11,7 @@ Restart=on-failure
 RestartSec=5
 Environment=LOGS_DIR=/var/log/ejabberd 
 Environment=EJABBERD_CONFIG_PATH=/etc/ejabberd/ejabberd.yml 
+Environment=ETC_DIR=/etc/ejabberd
 Environment=SPOOL_DIR=/var/lib/ejabberd
 ExecStart=/bin/sh -c "/opt/ejabberd-20.01/bin/ejabberdctl start && /opt/ejabberd-20.01/bin/ejabberdctl started"
 ExecStop=/bin/sh -c "/opt/ejabberd-20.01/bin/ejabberdctl stop && /opt/ejabberd-20.01/bin/ejabberdctl stopped"
