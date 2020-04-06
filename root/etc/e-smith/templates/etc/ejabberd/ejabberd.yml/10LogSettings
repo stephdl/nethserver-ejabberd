@@ -1,4 +1,4 @@
 
 loglevel: 4
-log_rotate_size: 10485760
-log_rotate_count: 1
+## rotation: Disable ejabberd's internal log rotation, as we use logrotate(8). 
+log_rotate_count: 0

@@ -1,0 +1,9 @@
+/var/log/ejabberd/*.log {
+     missingok
+     delaycompress
+     notifempty
+     sharedscripts
+     postrotate 
+         /bin/systemctl reload ejabberd.service > /dev/null 2>/dev/null || true
+     endscript
+}
