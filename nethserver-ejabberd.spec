@@ -1,6 +1,6 @@
 Summary: NethServer ejabberd XMPP server
 Name: nethserver-ejabberd
-Version: 1.6.0
+Version: 1.7.0
 Release: 1%{?dist}
 License: GPL
 Source0: %{name}-%{version}.tar.gz
@@ -73,6 +73,9 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd/upload
 
 
 %changelog
+* Tue Apr 28 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.7.0-1
+- Ejabberd: upgrade to 20.03 - NethServer/dev#6108
+
 * Wed Mar 04 2020 Stephane de Labrusse <stephdl@de-labrusse.fr> - 1.6.0-1
 - Upgrade Ejabberd to V20.01 - NethServer/dev#6070
 
