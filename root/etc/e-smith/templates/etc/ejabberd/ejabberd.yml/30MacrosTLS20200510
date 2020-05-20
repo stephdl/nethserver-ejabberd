@@ -1,0 +1,22 @@
+{
+
+my $tlsPolicy = $tls{'policy'} || '0';
+
+if ($tlsPolicy >= 20200510) {
+    $OUT .=q(
+#
+# TLS policy 20200510 only TLS 1.2
+#
+
+define_macro:
+  'CERTFILE': "/etc/ejabberd/ejabberd.pem"
+  'TLSOPTS':
+    - "no_sslv3"
+    - "no_tlsv1"
+    - "no_tlsv1_1"
+    - "cipher_server_preference"
+  'CIPHERS': "kEECDH:+kEECDH+SHA:kEDH:+kEDH+SHA:+kEDH+CAMELLIA:kECDH:+kECDH+SHA:kRSA:
+    +kRSA+SHA:+kRSA+CAMELLIA:!aNULL:!eNULL:!SSLv2:!SSLv3:!RC4:!MD5:!DES:!EXP:!SEED:!IDEA:!3DES"
+);
+}
+}
