@@ -2,7 +2,7 @@
 
 my $tlsPolicy = $tls{'policy'} || '0';
 
-if ($tlsPolicy >= 20181001) {
+if ($tlsPolicy == 20181001) {
     $OUT .=q(
 #
 # TLS policy 20181001
