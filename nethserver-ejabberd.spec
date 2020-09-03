@@ -1,6 +1,6 @@
 Summary: NethServer ejabberd XMPP server
 Name: nethserver-ejabberd
-Version: 1.8.1
+Version: 1.8.2
 Release: 1%{?dist}
 License: GPL
 Source0: %{name}-%{version}.tar.gz
@@ -73,6 +73,9 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd/upload
 
 
 %changelog
+* Thu Sep 03 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.8.2-1
+- Increase max_fsm_queue to new default - NethServer/nethserver-ejabberd#36
+
 * Thu Jul 02 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.8.1-1
 - Human readable numbers in Cockpit dashboards - NethServer/dev#6206
 
