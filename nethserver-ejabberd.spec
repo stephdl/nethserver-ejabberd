@@ -69,7 +69,7 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd/upload
 %systemd_preun ejabberd.service
 
 %postun
-%systemd_postun
+%systemd_postun ejabberd.service
 
 
 %changelog
