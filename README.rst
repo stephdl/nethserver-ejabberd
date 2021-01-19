@@ -35,7 +35,7 @@ Properties:
 * *ModMamPurgeDBInterval*: Remove messages older than X days, default is ``30``
 * *ShaperFast*: Download speed limit in bytes/second for admin users, default is ``1000000``
 * *ShaperNormal*: Download speed limit in bytes/second for users, default is ``500000``
-
+* *LdapTlsPortOverride*: The user roster LDAP client does not support STARTTLS. If the system account provider is configured with STARTTLS, configure the user roster LDAP client to use this TCP port number during connections instead (default is port 636).
 
 When enabled, web-based administration interface listens on 5280 port.
 You need a user inside jabberadmins group to login.
