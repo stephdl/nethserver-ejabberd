@@ -15,6 +15,10 @@
         $ldap_encrypt = 'tls';
     }
 
+    if ($sssd->startTls()) {
+        $ldap_encrypt = 'tls';
+        $ldap_port = $ejabberd{'LdapTlsPortOverride'} || '636';
+    }
 
     $config{'ldap_servers'} = $ldap_host;
     $config{'ldap_port'} = $ldap_port;
