@@ -1,6 +1,6 @@
 Summary: NethServer ejabberd XMPP server
 Name: nethserver-ejabberd
-Version: 1.8.2
+Version: 1.8.3
 Release: 1%{?dist}
 License: GPL
 Source0: %{name}-%{version}.tar.gz
@@ -73,6 +73,10 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd/upload
 
 
 %changelog
+* Wed Jan 27 2021 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.8.3-1
+- Ejabberd: Samba AD bind is broken in  mod_shared_roster_ldap - Bug NethServer/dev#6399
+- ejabberd: rpm build fail after Fedora31 - Bug NethServer/dev#6400
+
 * Thu Sep 03 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.8.2-1
 - Increase max_fsm_queue to new default - NethServer/nethserver-ejabberd#36
 
