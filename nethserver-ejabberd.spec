@@ -1,6 +1,6 @@
 Summary: NethServer ejabberd XMPP server
 Name: nethserver-ejabberd
-Version: 1.8.3
+Version: 1.8.4
 Release: 1%{?dist}
 License: GPL
 Source0: %{name}-%{version}.tar.gz
@@ -73,6 +73,9 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/nethserver/ejabberd/upload
 
 
 %changelog
+* Fri Jan 29 2021 Davide Principi <davide.principi@nethesis.it> - 1.8.4-1
+- Fix LdapTlsPortOverride db prop name - Bug NethServer/dev#6399
+
 * Wed Jan 27 2021 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 1.8.3-1
 - Ejabberd: Samba AD bind is broken in  mod_shared_roster_ldap - Bug NethServer/dev#6399
 - ejabberd: rpm build fail after Fedora31 - Bug NethServer/dev#6400
